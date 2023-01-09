@@ -3,7 +3,7 @@ extends Node
 
 var blink_allowed = true
 var isPressed = false
-var presstime
+
 var passed = false
 var blink_times = 0
 
@@ -53,28 +53,43 @@ func _process(_delta):
 
 
 var touch_pos = Vector2.ZERO
+var holdTiming = false
+
+func _unhandled_input(event):
+	if !passed and event is InputEventMouseButton and event.is_pressed():
+#		print("Mouse Click at: ", event.position)
+		
+		isPressed = true
+		holdTiming = true
+		touch_pos = event.position
+		$touch_hold_timer.start()
+
+	if !passed and event is InputEventMouseButton and !event.is_pressed():
+#		print("Mouse Unclick at: ", event.position)
+		
+		isPressed = false
+
+		if holdTiming:
+			TA.touch(event.position)
+			
+			blink()
+			if (blink_times > 6):
+				Hint.show_hint("画面を触れたままに、夢の奥へ進む。", false)
+		else:
+			TA.hold_end()
 
 
-func _on_screen_touch_down():
-#	touch_pos = get_viewport().get_mouse_position()
-	presstime = OS.get_ticks_msec()
-	isPressed = true
-	TA.hold_start(touch_pos)
-
-
-func _on_screen_touch_up():
-	isPressed = false
-	TA.hold_end()
-	if (OS.get_ticks_msec() - presstime < 1000):
-		blink()
-		if (blink_times > 6):
-			Hint.show_hint("画面を触れたままに、夢の奥へ進む。", false)
+func _on_touch_hold_timeout():
+	holdTiming = false
+	
+	if isPressed:
+		TA.hold_start(touch_pos)
 
 
 func pass_eye():
 	passed = true
+	forest.touch_enabled = true
 	TA.hold_end()
-	$ScreenTouch.queue_free()
 	
 	var tween := create_tween()
 	tween.tween_property($Eye, "modulate:a", .0, 1.0)
@@ -85,3 +100,4 @@ func pass_eye():
 
 func remove_eye():
 	$Eye.queue_free()
+

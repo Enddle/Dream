@@ -76,15 +76,13 @@ omni_attenuation = 3.24901
 
 [node name="Stars" type="Spatial" parent="World"]
 
-[node name="ScreenTouch" type="Button" parent="."]
-modulate = Color( 1, 1, 1, 0 )
-anchor_right = 1.0
-anchor_bottom = 1.0
-
 [node name="Label" type="Label" parent="."]
 margin_right = 40.0
 margin_bottom = 14.0
 custom_fonts/font = ExtResource( 2 )
 
-[connection signal="button_down" from="ScreenTouch" to="." method="_on_screen_touch_down"]
-[connection signal="button_up" from="ScreenTouch" to="." method="_on_screen_touch_up"]
+[node name="add_star_timer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[connection signal="timeout" from="add_star_timer" to="." method="_on_add_star_timeout"]

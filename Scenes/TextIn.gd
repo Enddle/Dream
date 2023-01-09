@@ -177,16 +177,20 @@ func get_delay(n, cc) -> float:
 	return 0.0
 
 
-func _on_screen_touch_down():
-	if scene_out: return
-	DynamicColor.start_seq(1)
-	TA.hold_start()
+func _unhandled_input(event):
+	if event is InputEventMouseButton and event.is_pressed():
+#		print("Mouse Click at: ", event.position)
+		
+		if scene_out: return
+		DynamicColor.start_seq(1)
+		TA.hold_start(event.position)
 
-
-func _on_screen_touch_up():
-	if scene_out: return
-	DynamicColor.start_seq(2)
-	TA.hold_end()
+	if event is InputEventMouseButton and !event.is_pressed():
+#		print("Mouse Unclick at: ", event.position)
+		
+		if scene_out: return
+		DynamicColor.start_seq(2)
+		TA.hold_end()
 
 
 func next_scene():

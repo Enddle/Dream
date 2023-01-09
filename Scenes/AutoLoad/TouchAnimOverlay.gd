@@ -6,18 +6,18 @@ const touch_a = preload("res://src/Touch.tscn")
 var tween
 
 func touch(pos = Vector2.ZERO):
-#func touch():
 	
 	var t = touch_a.instance()
-#	t.rect_position = pos
-	t.rect_position = Vector2(2026, 1248)
+	
+	t.rect_position = pos
+#	t.rect_position = Vector2(2026, 1248)
 	
 	add_child(t)
 
 
 func hold_start(pos = Vector2.ZERO):
 	
-#	$hold.rect_position = pos
+	$hold.rect_position = pos
 	
 	if tween: tween.kill()
 	tween = create_tween().set_loops().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
@@ -28,7 +28,6 @@ func hold_start(pos = Vector2.ZERO):
 
 
 func hold_end():
-#	return
 	if tween: tween.kill()
 	tween = create_tween()
 	tween.tween_property($hold, "modulate", Color(.5, .5, .5, .0), .2)

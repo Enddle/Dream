@@ -6,7 +6,7 @@ var accel = Vector3.ZERO
 var speed = Vector3.ZERO
 var timetick
 var laststar
-var timepress
+
 var scene_out = false
 
 onready var pointer = $Camera/Spatial/Pointer
@@ -41,22 +41,24 @@ func _process(delta):
 	speed += .5 * accel * delta
 	pointer.translate(speed * delta * 2)
 	
-	if (OS.get_ticks_msec() % 2000 <= 20):
-		add_star()
+#	if (OS.get_ticks_msec() % 2000 <= 20):
+#		add_star()
 
 
-func _on_screen_touch_down():
-	timepress = OS.get_ticks_msec()
-
-
-func _on_screen_touch_up():
-	var t = OS.get_ticks_msec()
-	if t - timepress < 1000:
-		if t - laststar > 800:
-			laststar = t
-			
-			TA.touch()
+func _unhandled_input(event):
+	if event is InputEventMouseButton and !event.is_pressed():
+#		print("Mouse Unclick at: ", event.position)
+		if can_add_star:
+			can_add_star = false
+			TA.touch(event.position)
 			add_star()
+			$add_star_timer.start()
+
+
+var can_add_star = true
+
+func _on_add_star_timeout():
+	can_add_star = true
 
 
 func add_star():
@@ -84,3 +86,4 @@ func next_scene():
 		yield(get_tree().create_timer(.25), "timeout")
 
 	get_tree().change_scene("res://Scenes/TextIn.tscn")
+

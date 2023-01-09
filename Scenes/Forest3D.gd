@@ -79,26 +79,27 @@ func add_tree_at(pos):
 	tree.global_translation = pos
 
 
-var touch_pos = Vector2.ZERO
+var touch_enabled = false
 
-
-func _on_screen_touch_down():
-#	touch_pos = get_viewport().get_mouse_position()
-	if !step_allowed: return
-	
-	AuH._FX(AuH.WALK_FX)
-	TA.touch(touch_pos)
-	
-	walk_step()
-	steps -= 1
-	if steps < 0:
-		if step_speed > 5.8:
-			next_scene()
-		elif step_speed < 4.0:
-			Hint.show_hint("もっと速く走る。", false, false)
-	
-	if randf() < add_tree_rate: return
-	random_tree_front()
+func _unhandled_input(event):
+	if touch_enabled and event is InputEventMouseButton and !event.is_pressed():
+#		print("Mouse Unclick at: ", event.position)
+		
+		if !step_allowed: return
+		
+		AuH._FX(AuH.WALK_FX)
+		TA.touch(event.position)
+		
+		walk_step()
+		steps -= 1
+		if steps < 0:
+			if step_speed > 5.8:
+				next_scene()
+			elif step_speed < 4.0:
+				Hint.show_hint("もっと速く走る。", false, false)
+		
+		if randf() < add_tree_rate: return
+		random_tree_front()
 
 
 func walk_step():

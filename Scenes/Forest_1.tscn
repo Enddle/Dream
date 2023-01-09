@@ -19,13 +19,8 @@ __meta__ = {
 
 [node name="Forest" parent="." instance=ExtResource( 1 )]
 
-[node name="ScreenTouch" type="Button" parent="."]
-modulate = Color( 1, 1, 1, 0 )
-anchor_right = 1.0
-anchor_bottom = 1.0
-__meta__ = {
-"_edit_lock_": true
-}
+[node name="touch_hold_timer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
 
-[connection signal="button_down" from="ScreenTouch" to="." method="_on_screen_touch_down"]
-[connection signal="button_up" from="ScreenTouch" to="." method="_on_screen_touch_up"]
+[connection signal="timeout" from="touch_hold_timer" to="." method="_on_touch_hold_timeout"]

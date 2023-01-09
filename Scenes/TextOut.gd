@@ -63,22 +63,28 @@ func _process(delta):
 		text_con.get_child(randi()%covers).move_along(gyro)
 
 
-func _on_screen_touch_down():
-	if tween: tween.kill()
-	tween = create_tween().set_ease(Tween.EASE_IN)
-	tween.tween_property(main_text, "translation:z", -12.0, 2.0)
-	TA.hold_start()
+func _unhandled_input(event):
+	if event is InputEventMouseButton and event.is_pressed():
+#		print("Mouse Click at: ", event.position)
+		
+		if tween: tween.kill()
+		tween = create_tween().set_ease(Tween.EASE_IN)
+		tween.tween_property(main_text, "translation:z", -12.0, 2.0)
+		
+		TA.hold_start(event.position)
 
-
-func _on_screen_touch_up():
-	fly_out_f = (main_text.translation.z + 10) / 2
-	if fly_out_f <= -.01:
-		touched = true
-	if tween: tween.kill()
-	tween = create_tween().set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
-	tween.tween_property(main_text, "translation:z", -10.0, 1.0)
-	tween.parallel().tween_callback(self, "fly_out")
-	TA.hold_end()
+	if event is InputEventMouseButton and !event.is_pressed():
+#		print("Mouse Unclick at: ", event.position)
+		
+		fly_out_f = (main_text.translation.z + 10) / 2
+		if fly_out_f <= -.01:
+			touched = true
+		
+		if tween: tween.kill()
+		tween = create_tween().set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
+		tween.tween_property(main_text, "translation:z", -10.0, 1.0)
+		tween.parallel().tween_callback(self, "fly_out")
+		TA.hold_end()
 
 
 func fly_out():

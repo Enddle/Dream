@@ -130,60 +130,51 @@ func _process(delta):
 				start_scene()
 
 
-#func _process(delta):
-#	var state = OS.get_power_state()
-#	if state == OS.POWERSTATE_CHARGED || state == OS.POWERSTATE_CHARGING:
-#		if !anim_playing:
-#			print(OS.get_power_state())
-#			anim_playing = true
-#			Anim.play("charging_unplug_loop")
-#			show_hint(hints[0])
-#	else:
-#		if current_step == 0:
-##			print(OS.get_power_state())
-#			current_step = 1
-#			Anim.play("charging_unplug")
-
-
 func show_hint(text):
 	Hint.show_hint(text, false)
 	pass
 
 
+
 var touch_pos = Vector2.ZERO
 
-func _on_screen_touch_down():
-#	touch_pos = get_viewport().get_mouse_position()
-	
-	show_hint(hints[current_step])
-	
-	if current_step == 2:
-		if OS.get_ticks_msec() - presstime > 500:
-			presstime = OS.get_ticks_msec()
-	
-	elif current_step == 3:
-		touching = true
-		TA.hold_start(touch_pos)
+func _unhandled_input(event):
+	if event is InputEventMouseButton and event.is_pressed():
+#		print("Mouse Click at: ", event.position)
+		
+		touch_pos = event.position
+		
+		show_hint(hints[current_step])
+		
+		if current_step == 2:
+			if OS.get_ticks_msec() - presstime > 500:
+				presstime = OS.get_ticks_msec()
+		
+		elif current_step == 3:
+			touching = true
+			TA.hold_start(touch_pos)
 
 
-func _on_screen_touch_up():
-	
-	if current_step == 2:
-		if touch_count >= 3:
-			pass
-		elif OS.get_ticks_msec() - presstime < 1000:
-			var t = $touch.get_child(touch_count)
-			
-			AuH.rand_note(rand_range(-20, 0), .0, "Reverb")
-			TA.touch(touch_pos)
-			
-			tween = create_tween().set_trans(Tween.TRANS_BACK)
-			tween.tween_property(t, "rect_scale", Vector2(.05, .05), .5)
-			touch_count += 1
-	
-	elif current_step == 3:
-		touching = false
-		TA.hold_end()
+	if event is InputEventMouseButton and !event.is_pressed():
+#		print("Mouse Unclick at: ", event.position)
+		
+		if current_step == 2:
+			if touch_count >= 3:
+				pass
+			elif OS.get_ticks_msec() - presstime < 300:
+				var t = $touch.get_child(touch_count)
+				
+				AuH.rand_note(rand_range(-20, 0), .0, "Reverb")
+				TA.touch(touch_pos)
+				
+				tween = create_tween().set_trans(Tween.TRANS_BACK)
+				tween.tween_property(t, "rect_scale", Vector2(.05, .05), .5)
+				touch_count += 1
+		
+		elif current_step == 3:
+			touching = false
+			TA.hold_end()
+
 
 
 func start_scene():

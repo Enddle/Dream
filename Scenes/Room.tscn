@@ -69,17 +69,11 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 60 )
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 2 )
 
-[node name="Button" type="Button" parent="."]
-modulate = Color( 1, 1, 1, 0 )
-anchor_right = 1.0
-anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="Tween" type="Tween" parent="."]
 playback_process_mode = 0
 
-[connection signal="button_down" from="Button" to="." method="_on_Button_button_down"]
-[connection signal="button_up" from="Button" to="." method="_on_Button_button_up"]
-[connection signal="toggled" from="Button" to="." method="_on_Button_toggled"]
+[node name="touch_hold_timer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[connection signal="timeout" from="touch_hold_timer" to="." method="_on_touch_hold_timeout"]

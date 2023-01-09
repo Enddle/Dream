@@ -117,11 +117,6 @@ texture = ExtResource( 4 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 15000, 15000 )
 
-[node name="ScreenTouch" type="Button" parent="."]
-modulate = Color( 1, 1, 1, 0 )
-anchor_right = 1.0
-anchor_bottom = 1.0
-
 [node name="Label" type="Label" parent="."]
 visible = false
 margin_left = 77.0
@@ -130,5 +125,3 @@ margin_right = 117.0
 margin_bottom = 74.0
 custom_fonts/font = ExtResource( 1 )
 text = "Audio Device: "
-
-[connection signal="button_down" from="ScreenTouch" to="." method="_on_screen_touch_down"]
