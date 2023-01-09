@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/fonts/text_scene_font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://src/Text.gd" type="Script" id=2]
+
+[node name="Spatial" type="Spatial"]
+script = ExtResource( 2 )
+
+[node name="Text" type="Label3D" parent="."]
+cast_shadow = 0
+billboard = 1
+double_sided = false
+modulate = Color( 0, 0, 0, 0 )
+text = "A"
+font = ExtResource( 1 )

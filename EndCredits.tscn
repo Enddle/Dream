@@ -1,0 +1,55 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/fonts/hint_font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://EndCredits.gd" type="Script" id=2]
+
+[node name="Node" type="Node"]
+script = ExtResource( 2 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="Label" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -323.5
+margin_top = -116.5
+margin_right = 323.5
+margin_bottom = 116.5
+custom_fonts/font = ExtResource( 1 )
+text = "「DREAM」
+
+
+ZHENG JIANHAO　ズン ジアンハオ"
+align = 1
+
+[node name="Label2" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -258.0
+margin_top = -411.5
+margin_right = 258.0
+margin_bottom = 411.5
+custom_fonts/font = ExtResource( 1 )
+text = "
+I can hear the silence
+inside the endless forest
+I can hear the stars
+blinking in the sky
+
+When the rain starts
+and thunder strikes
+I can see the forest
+changing its shape
+
+When the time comes
+and I fall into the void
+the stars will rise
+take me to the other world"
+align = 1

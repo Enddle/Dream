@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/fonts/text_scene_font_bold.tres" type="DynamicFont" id=1]
+[ext_resource path="res://src/TextCover.gd" type="Script" id=2]
+
+[node name="Node" type="Spatial"]
+script = ExtResource( 2 )
+
+[node name="Label3D" type="Label3D" parent="."]
+shaded = true
+modulate = Color( 0.133333, 0.133333, 0.133333, 1 )
+outline_modulate = Color( 0.133333, 0.133333, 0.133333, 1 )
+text = "A"
+font = ExtResource( 1 )

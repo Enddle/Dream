@@ -1,0 +1,134 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://src/fonts/hint_font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Scenes/Forest3D.gd" type="Script" id=2]
+[ext_resource path="res://src/trees/tree0.png" type="Texture" id=3]
+[ext_resource path="res://src/trees/leaf_pattern.jpg" type="Texture" id=4]
+
+[sub_resource type="Environment" id=2]
+background_mode = 1
+ambient_light_energy = 0.0
+fog_enabled = true
+fog_color = Color( 0, 0, 0, 1 )
+fog_sun_color = Color( 1, 1, 1, 1 )
+fog_depth_enabled = false
+fog_depth_begin = 0.0
+fog_depth_end = 30.0
+fog_depth_curve = 0.203063
+dof_blur_far_distance = 40.0
+dof_blur_far_transition = 10.0
+dof_blur_far_quality = 2
+
+[sub_resource type="SphereMesh" id=3]
+flip_faces = true
+radius = 80.0
+height = 80.0
+
+[sub_resource type="CylinderMesh" id=1]
+top_radius = 80.0
+bottom_radius = 0.0
+height = 0.001
+
+[node name="Node" type="Node"]
+script = ExtResource( 2 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 2 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.978148, -0.207912, 0, 0.207912, 0.978148, 0, 3.16, 0 )
+fov = 50.0
+
+[node name="World" type="Spatial" parent="."]
+
+[node name="trees" type="Spatial" parent="World"]
+
+[node name="Sprite3D2" type="Sprite3D" parent="World/trees"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.89698, 13.0922, -17.9909 )
+flip_h = true
+billboard = 2
+texture = ExtResource( 3 )
+
+[node name="Sprite3D" type="Sprite3D" parent="World/trees"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.43016, 13.0799, -14.8317 )
+billboard = 2
+texture = ExtResource( 3 )
+
+[node name="Sprite3D3" type="Sprite3D" parent="World/trees"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.43016, 13.0799, 12.9291 )
+billboard = 2
+texture = ExtResource( 3 )
+
+[node name="Sprite3D4" type="Sprite3D" parent="World/trees"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -28.684, 13.0799, -5.91347 )
+billboard = 2
+texture = ExtResource( 3 )
+
+[node name="Sprite3D5" type="Sprite3D" parent="World/trees"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -23.4022, 13.0799, -36.6932 )
+billboard = 2
+texture = ExtResource( 3 )
+
+[node name="Sprite3D6" type="Sprite3D" parent="World/trees"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.9314, 13.0799, 35.4474 )
+billboard = 2
+texture = ExtResource( 3 )
+
+[node name="Sprite3D7" type="Sprite3D" parent="World/trees"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 31.026, 13.0799, 2.52222 )
+billboard = 2
+texture = ExtResource( 3 )
+
+[node name="Sprite3D8" type="Sprite3D" parent="World/trees"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.25275, 13.0799, -48.7809 )
+billboard = 2
+texture = ExtResource( 3 )
+
+[node name="dome" type="MeshInstance" parent="World"]
+layers = 2
+mesh = SubResource( 3 )
+skeleton = NodePath("../../..")
+
+[node name="SpotLight" type="SpotLight" parent="World/dome"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 20, 0 )
+light_energy = 0.3
+light_bake_mode = 0
+spot_range = 80.0
+spot_angle = 100.0
+
+[node name="ground" type="MeshInstance" parent="World"]
+mesh = SubResource( 1 )
+skeleton = NodePath("../..")
+
+[node name="OmniLight" type="OmniLight" parent="World/ground"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.14026, 0 )
+light_energy = 0.2
+light_bake_mode = 0
+omni_range = 30.0
+omni_attenuation = 3.73213
+
+[node name="leaf_bg" type="Sprite3D" parent="World"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.05, 0 )
+cast_shadow = 0
+pixel_size = 0.005
+transparent = false
+shaded = true
+texture = ExtResource( 4 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 15000, 15000 )
+
+[node name="ScreenTouch" type="Button" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Label" type="Label" parent="."]
+visible = false
+margin_left = 77.0
+margin_top = 60.0
+margin_right = 117.0
+margin_bottom = 74.0
+custom_fonts/font = ExtResource( 1 )
+text = "Audio Device: "
+
+[connection signal="button_down" from="ScreenTouch" to="." method="_on_screen_touch_down"]

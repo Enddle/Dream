@@ -1,0 +1,225 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://src/fonts/text_scene_font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Scenes/TextOut.gd" type="Script" id=2]
+[ext_resource path="res://src/fonts/hint_font.tres" type="DynamicFont" id=3]
+[ext_resource path="res://src/icons/arrow.png" type="Texture" id=4]
+
+[sub_resource type="Environment" id=1]
+background_mode = 1
+
+[sub_resource type="Animation" id=4]
+resource_name = "arrow_indicate"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("arrow_pos/arrow:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 878, 654 ), Vector2( 878, 604 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("arrow_pos/arrow:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0.501961, 0.501961, 0.501961, 0.501961 ), Color( 0.501961, 0.501961, 0.501961, 0 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "light_off"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Camera/SpotLight:light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.7, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("World/OmniLight2:light_energy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("World/OmniLight:light_energy")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.5, 0.0 ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "light_on"
+length = 2.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Camera/SpotLight:light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.4, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 0.7 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("World/OmniLight2:light_energy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("World/OmniLight:light_energy")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.5 ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 2.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "light_on_anim_ends"
+} ]
+}
+
+[node name="Node" type="Node"]
+script = ExtResource( 2 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 1 )
+
+[node name="Camera" type="Camera" parent="."]
+
+[node name="SpotLight" type="SpotLight" parent="Camera"]
+light_energy = 0.0
+light_indirect_energy = 0.0
+light_bake_mode = 0
+shadow_enabled = true
+spot_range = 30.0
+spot_attenuation = 2.0
+spot_angle = 15.0
+
+[node name="World" type="Spatial" parent="."]
+
+[node name="Texts" type="Spatial" parent="World"]
+
+[node name="MainText" type="Label3D" parent="World"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10 )
+shaded = true
+text = "いつも
+同じ夢の中を
+彷徨っている"
+font = ExtResource( 1 )
+
+[node name="MainText2" type="Label3D" parent="World"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10 )
+visible = false
+shaded = true
+text = "and I always
+found myself wandering
+in the same dream"
+font = ExtResource( 1 )
+
+[node name="OmniLight2" type="OmniLight" parent="World"]
+light_energy = 0.0
+light_indirect_energy = 0.0
+light_bake_mode = 0
+shadow_enabled = true
+
+[node name="OmniLight" type="OmniLight" parent="World"]
+light_energy = 0.0
+light_indirect_energy = 0.0
+light_bake_mode = 0
+shadow_enabled = true
+omni_range = 15.0
+
+[node name="ScreenTouch" type="Button" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Label" type="Label" parent="."]
+visible = false
+margin_right = 40.0
+margin_bottom = 56.0
+custom_fonts/font = ExtResource( 3 )
+
+[node name="Anim" type="AnimationPlayer" parent="."]
+anims/arrow_indicate = SubResource( 4 )
+anims/light_off = SubResource( 3 )
+anims/light_on = SubResource( 2 )
+
+[node name="arrow_pos" type="Control" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -1133.0
+margin_top = -744.0
+margin_right = -1093.0
+margin_bottom = -704.0
+
+[node name="arrow" type="TextureRect" parent="arrow_pos"]
+self_modulate = Color( 0.501961, 0.501961, 0.501961, 0 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 858.0
+margin_top = 634.0
+margin_right = 1370.0
+margin_bottom = 874.0
+rect_scale = Vector2( 0.6, 0.6 )
+rect_pivot_offset = Vector2( 256, 120 )
+texture = ExtResource( 4 )
+
+[connection signal="button_down" from="ScreenTouch" to="." method="_on_screen_touch_down"]
+[connection signal="button_up" from="ScreenTouch" to="." method="_on_screen_touch_up"]

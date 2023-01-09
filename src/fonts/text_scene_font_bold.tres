@@ -1,0 +1,9 @@
+[gd_resource type="DynamicFont" load_steps=2 format=2]
+
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://src/fonts/M_PLUS_Rounded_1c/MPLUSRounded1c-Black.ttf"
+
+[resource]
+size = 200
+use_mipmaps = true
+font_data = SubResource( 1 )

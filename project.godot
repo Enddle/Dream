@@ -1,0 +1,42 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+[application]
+
+config/name="Dream"
+run/main_scene="res://StartingScreen.tscn"
+config/icon="res://icon.png"
+
+[autoload]
+
+AuH="*res://Scenes/AutoLoad/AudioHelper.tscn"
+DynamicColor="*res://Scenes/AutoLoad/DynamicColor.tscn"
+SceneHelper="*res://Scenes/AutoLoad/SceneHelper.tscn"
+Hint="*res://Scenes/AutoLoad/Hint.tscn"
+TA="*res://Scenes/AutoLoad/TouchAnimOverlay.tscn"
+
+[display]
+
+window/size/width=2266
+window/size/height=1488
+window/size/always_on_top=true
+window/size/test_width=755
+window/size/test_height=496
+window/stretch/mode="2d"
+window/stretch/aspect="expand"
+
+[physics]
+
+common/enable_pause_aware_picking=true
+
+[rendering]
+
+quality/shading/force_vertex_shading.mobile=false
+environment/default_environment="res://default_env.tres"

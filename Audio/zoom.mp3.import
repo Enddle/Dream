@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/zoom.mp3-c9e7b11b8e887c9bc9a6c0f6d57d0545.mp3str"
+
+[deps]
+
+source_file="res://Audio/zoom.mp3"
+dest_files=[ "res://.import/zoom.mp3-c9e7b11b8e887c9bc9a6c0f6d57d0545.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
