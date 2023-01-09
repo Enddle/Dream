@@ -3,8 +3,8 @@ extends Node
 
 const credits = [
 	"「DREAM」\n\n\nZHENG JIANHAO　ズン ジアンハオ",
-	"武蔵野美術大学　映像学科\n\n\n三年次進級制作展",
-	"\n\nシャルルゼミ\n",
+	"Pratt Institute\n\n\nDepartment of Digital Arts",
+	"武蔵野美術大学\n\n\n映像学科",
 	"\n\nご視聴ありがとうございます!\n"
 ]
 
