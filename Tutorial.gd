@@ -138,7 +138,7 @@ func show_hint(text):
 
 var touch_pos = Vector2.ZERO
 
-func _unhandled_input(event):
+func _input(event):
 	if event is InputEventMouseButton and event.is_pressed():
 #		print("Mouse Click at: ", event.position)
 		

@@ -10,6 +10,7 @@ script = ExtResource( 2 )
 
 [node name="Control" parent="." instance=ExtResource( 1 )]
 visible = false
+mouse_filter = 2
 
 [node name="hold" type="Control" parent="."]
 anchor_left = 1.0
@@ -20,10 +21,12 @@ margin_left = -240.0
 margin_top = -240.0
 margin_right = -200.0
 margin_bottom = -200.0
+mouse_filter = 2
 
 [node name="a" type="TextureRect" parent="hold"]
 margin_left = -256.0
 margin_top = -256.0
 margin_right = 256.0
 margin_bottom = 256.0
+mouse_filter = 2
 texture = ExtResource( 3 )

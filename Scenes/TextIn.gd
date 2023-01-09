@@ -179,7 +179,7 @@ func get_delay(n, cc) -> float:
 	return 0.0
 
 
-func _unhandled_input(event):
+func _input(event):
 	if event is InputEventMouseButton and event.is_pressed():
 #		print("Mouse Click at: ", event.position)
 		

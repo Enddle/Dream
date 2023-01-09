@@ -29,7 +29,7 @@ func _process(delta):
 var touch_pos = Vector2.ZERO
 var holdTiming = false
 
-func _unhandled_input(event):
+func _input(event):
 	if event is InputEventMouseButton and event.is_pressed():
 #		print("Mouse Click at: ", event.position)
 		

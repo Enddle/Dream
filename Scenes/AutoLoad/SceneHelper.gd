@@ -3,7 +3,7 @@ extends Node
 
 const pausetime = 20000
 const pausetime_t = 10000
-const countdown = 10.0
+const countdown = 60.0
 
 
 var tween
