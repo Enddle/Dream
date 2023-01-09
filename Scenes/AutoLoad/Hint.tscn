@@ -15,6 +15,7 @@ margin_top = 47.0
 margin_right = 1047.0
 margin_bottom = 1047.0
 rect_scale = Vector2( 0.08, 0.08 )
+mouse_filter = 2
 texture = ExtResource( 1 )
 
 [node name="Button" type="Button" parent="TextureRect"]

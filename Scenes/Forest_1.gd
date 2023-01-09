@@ -55,7 +55,7 @@ func _process(_delta):
 var touch_pos = Vector2.ZERO
 var holdTiming = false
 
-func _unhandled_input(event):
+func _input(event):
 	if !passed and event is InputEventMouseButton and event.is_pressed():
 #		print("Mouse Click at: ", event.position)
 		
@@ -64,17 +64,18 @@ func _unhandled_input(event):
 		touch_pos = event.position
 		$touch_hold_timer.start()
 
-	if !passed and event is InputEventMouseButton and !event.is_pressed():
+	if event is InputEventMouseButton and !event.is_pressed():
 #		print("Mouse Unclick at: ", event.position)
 		
-		isPressed = false
+		if !passed:
+			isPressed = false
 
-		if holdTiming:
-			TA.touch(event.position)
-			
-			blink()
-			if (blink_times > 6):
-				Hint.show_hint("画面を触れたままに、夢の奥へ進む。", false)
+			if holdTiming:
+				TA.touch(event.position)
+				
+				blink()
+				if (blink_times > 6):
+					Hint.show_hint("画面を触れたままに、夢の奥へ進む。", false)
 		else:
 			TA.hold_end()
 

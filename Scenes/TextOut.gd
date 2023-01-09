@@ -63,7 +63,7 @@ func _process(delta):
 		text_con.get_child(randi()%covers).move_along(gyro)
 
 
-func _unhandled_input(event):
+func _input(event):
 	if event is InputEventMouseButton and event.is_pressed():
 #		print("Mouse Click at: ", event.position)
 		
@@ -94,6 +94,8 @@ func fly_out():
 
 
 func next_scene():
+	TA.hold_end()
+	
 	SceneHelper.fade_to_black(0, 2.5)
 	SceneHelper.rounds = 1
 	get_tree().change_scene("res://Scenes/Forest_2.tscn")

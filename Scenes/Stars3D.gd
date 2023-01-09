@@ -45,7 +45,7 @@ func _process(delta):
 #		add_star()
 
 
-func _unhandled_input(event):
+func _input(event):
 	if event is InputEventMouseButton and !event.is_pressed():
 #		print("Mouse Unclick at: ", event.position)
 		if can_add_star:

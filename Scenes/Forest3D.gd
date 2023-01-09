@@ -81,7 +81,7 @@ func add_tree_at(pos):
 
 var touch_enabled = false
 
-func _unhandled_input(event):
+func _input(event):
 	if touch_enabled and event is InputEventMouseButton and !event.is_pressed():
 #		print("Mouse Unclick at: ", event.position)
 		
