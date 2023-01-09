@@ -24,7 +24,7 @@ func _process(delta):
 		return
 	
 	var g = Input.get_gyroscope() * delta
-	if stepify(g.length(), 0.001) != 0:
+	if stepify(g.length(), 0.1) != 0:
 		scene_out = true
 		start_tutorial()
 
