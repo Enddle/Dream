@@ -31,6 +31,8 @@ func blink():
 	
 	blink_times += 1
 	
+	Connect.sendbang()
+	
 	state_machine.travel("eye_blink")
 	yield(get_tree().create_timer(.4), "timeout")
 	forest.random_trees_all()

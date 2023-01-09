@@ -94,6 +94,7 @@ func _ready():
 	
 	if rounds == 0:
 		Connect.sendudp("4")
+		Connect.sendextra("1")
 		AuH._FX(AuH.ALARM_FX)
 		yield(get_tree().create_timer(2), "timeout")
 		AuH._BG(AuH.TEXT_BG, .0, .5)
@@ -127,6 +128,9 @@ func _process(delta):
 			TA.hold_end()
 			
 			yield(get_tree().create_timer(round1_delay), "timeout")
+			
+			Connect.sendudp("-2")
+			
 			end_scenes()
 			
 		elif time - timestart > 20 && !triggered:  # text fly out
@@ -198,6 +202,8 @@ func _input(event):
 func next_scene():
 	DynamicColor.start_seq(3)
 	TA.hold_end()
+	
+	Connect.sendextra("0")
 	
 	yield(get_tree().create_timer(12.0), "timeout")
 	SceneHelper.fade_to_black(1.0, 0.05)

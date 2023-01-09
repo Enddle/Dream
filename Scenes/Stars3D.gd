@@ -18,6 +18,8 @@ func _ready():
 	timetick = OS.get_ticks_msec() / 1000
 	laststar = timetick - 1
 	
+	Connect.resetbang()
+	
 	if SceneHelper.rounds == 0:
 		AuH._BG(AuH.SPACE_BG)
 		Connect.sendudp("3")
@@ -25,6 +27,7 @@ func _ready():
 	elif SceneHelper.rounds == 1:
 		AuH._BG(AuH.SPACE_2_BG)
 		Connect.sendudp("7")
+		Connect.sendextra("0")
 
 
 func _process(delta):
@@ -40,9 +43,6 @@ func _process(delta):
 		accel -= pointer.translation.normalized() * 5
 	speed += .5 * accel * delta
 	pointer.translate(speed * delta * 2)
-	
-#	if (OS.get_ticks_msec() % 2000 <= 20):
-#		add_star()
 
 
 func _input(event):
@@ -67,6 +67,8 @@ func add_star():
 	star_con.add_child(s)
 	s.global_transform = t
 	
+	Connect.sendbang()
+	
 	AuH.rand_note(rand_range(-20, 0), .0, "Reverb")
 
 
@@ -76,6 +78,8 @@ func next_scene():
 		tween.tween_property(pointer, "global_translation", Vector3.ZERO, 5.0)
 		yield(get_tree().create_timer(3), "timeout")
 		yield(get_tree().create_timer(1), "timeout")
+		
+		Connect.sendextra("1")
 		
 		SceneHelper.fade_to(Color.white, 1.0, 3.0)
 		

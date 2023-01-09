@@ -8,6 +8,7 @@ var scene_out = false
 
 func _ready():
 	Connect.sendudp("0")
+	Connect.resetbang()
 	
 	isMobile = (OS.get_name() == "iOS")
 	

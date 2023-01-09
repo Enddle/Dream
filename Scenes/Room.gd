@@ -14,6 +14,8 @@ func _process(delta):
 	
 	AuH._vol(AuH.BG, (cam.translation.z / 40 - .5) * -12 + 6)
 	
+	Connect.sendextra(cam.translation.z / 40 - .5)
+	
 	if isPressed:
 		cam.translation.z -= 2.5 * delta
 	

@@ -135,9 +135,8 @@ func settings_open():
 
 
 func _on_settings_save_pressed():
-	Connect.IP_ADDR = $settings_screen/ip.text
-	Connect.IP_PORT = $settings_screen/port.text as int
+	Connect.update($settings_screen/ip.text, $settings_screen/port.text)
 	$settings_screen.visible = false
-	print("Settings saved.")
-	print(Connect.IP_ADDR)
-	print(Connect.IP_PORT)
+#	print("Settings saved.")
+#	print(Connect.IP_ADDR)
+#	print(Connect.IP_PORT)
