@@ -7,6 +7,8 @@ var scene_out = false
 
 
 func _ready():
+	Connect.sendudp("0")
+	
 	isMobile = (OS.get_name() == "iOS")
 	
 	SceneHelper.rounds = 0
@@ -43,3 +45,8 @@ func _on_Button_button_down():
 		$Label2.text += d
 		$Label2.text += "\n"
 	pass # Replace with function body.
+
+
+func _on_settings_pressed():
+	SceneHelper.settings_open()
+

@@ -128,3 +128,16 @@ func _on_return_cancel_down():
 func _on_return_cancel_up():
 	$return_screen/cancel.modulate.a = 1.0
 	hide_restart()
+
+
+func settings_open():
+	$settings_screen.visible = true
+
+
+func _on_settings_save_pressed():
+	Connect.IP_ADDR = $settings_screen/ip.text
+	Connect.IP_PORT = $settings_screen/port.text as int
+	$settings_screen.visible = false
+	print("Settings saved.")
+	print(Connect.IP_ADDR)
+	print(Connect.IP_PORT)
