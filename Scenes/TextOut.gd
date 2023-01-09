@@ -21,6 +21,8 @@ func light_on_anim_ends():
 
 
 func _ready():
+	Connect.sendudp("5")
+	
 	randomize()
 	timetick = OS.get_ticks_msec()
 	

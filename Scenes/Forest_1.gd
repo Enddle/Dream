@@ -14,6 +14,8 @@ onready var anim_tree = $Eye/AnimationTree
 
 
 func _ready():
+	Connect.sendudp("2")
+	
 	anim_tree.active = true
 	state_machine = anim_tree["parameters/playback"]
 	

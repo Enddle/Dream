@@ -1,0 +1,95 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://src/dot.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/AutoLoad/Connect.gd" type="Script" id=2]
+[ext_resource path="res://src/fonts/hint_font.tres" type="DynamicFont" id=3]
+
+[node name="Control" type="CanvasLayer"]
+layer = 10
+script = ExtResource( 2 )
+
+[node name="Button" type="Button" parent="."]
+modulate = Color( 1, 1, 1, 0.196078 )
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -1092.0
+margin_top = 80.0
+margin_right = -80.0
+margin_bottom = 1086.0
+rect_scale = Vector2( 0.03, 0.03 )
+rect_pivot_offset = Vector2( 1012, 0 )
+icon = ExtResource( 1 )
+flat = true
+
+[node name="settings_screen" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="ColorRect" type="ColorRect" parent="settings_screen"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -1133.0
+margin_top = -744.0
+margin_right = 1133.0
+margin_bottom = 744.0
+color = Color( 0, 0, 0, 0.666667 )
+
+[node name="Label" type="Label" parent="settings_screen"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -280.0
+margin_top = -160.0
+margin_right = 280.0
+margin_bottom = -104.0
+custom_fonts/font = ExtResource( 3 )
+text = "SETTINGS"
+align = 1
+valign = 1
+
+[node name="ip" type="LineEdit" parent="settings_screen"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -348.0
+margin_top = -42.0
+margin_right = 130.0
+margin_bottom = 42.0
+custom_fonts/font = ExtResource( 3 )
+text = "192.168.137.1"
+caret_blink = true
+caret_blink_speed = 0.5
+
+[node name="port" type="LineEdit" parent="settings_screen"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 139.0
+margin_top = -42.0
+margin_right = 344.0
+margin_bottom = 42.0
+custom_fonts/font = ExtResource( 3 )
+text = "7000"
+caret_blink = true
+caret_blink_speed = 0.5
+
+[node name="save" type="Button" parent="settings_screen"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -143.0
+margin_top = 211.0
+margin_right = 143.0
+margin_bottom = 289.0
+custom_fonts/font = ExtResource( 3 )
+text = "SAVE & CLOSE"
+
+[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="settings_screen/save" to="." method="_on_save_pressed"]

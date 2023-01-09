@@ -4,6 +4,10 @@ var isPressed = false
 var scene_out = false
 
 
+func _ready():
+	Connect.sendudp("1")
+
+
 func _process(delta):
 	if scene_out:
 		return

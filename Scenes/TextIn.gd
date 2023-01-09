@@ -90,13 +90,15 @@ func _ready():
 	DynamicColor.start_seq(0)
 	
 	rounds = SceneHelper.rounds
-#	rounds = 1
 	process_text(rounds)
 	
 	if rounds == 0:
+		Connect.sendudp("4")
 		AuH._FX(AuH.ALARM_FX)
 		yield(get_tree().create_timer(2), "timeout")
 		AuH._BG(AuH.TEXT_BG, .0, .5)
+	else:
+		Connect.sendudp("8")
 
 
 var sec = 0

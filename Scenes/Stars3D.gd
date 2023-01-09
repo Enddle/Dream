@@ -18,13 +18,13 @@ func _ready():
 	timetick = OS.get_ticks_msec() / 1000
 	laststar = timetick - 1
 	
-#	SceneHelper.rounds = 1
-#	AuH._BG(AuH.SPACE_2_BG)
-	
 	if SceneHelper.rounds == 0:
 		AuH._BG(AuH.SPACE_BG)
+		Connect.sendudp("3")
+		
 	elif SceneHelper.rounds == 1:
 		AuH._BG(AuH.SPACE_2_BG)
+		Connect.sendudp("7")
 
 
 func _process(delta):
