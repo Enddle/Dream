@@ -14,7 +14,7 @@ func update(ip, port):
 	IP_ADDR = ip
 	IP_PORT_0 = port as int
 	IP_PORT_1 = IP_PORT_0 + 1
-	IP_PORT_1 = IP_PORT_0 + 2
+	IP_PORT_2 = IP_PORT_0 + 2
 
 func sendudp(msg):
 	socketUDP.set_dest_address(IP_ADDR, IP_PORT_0)
