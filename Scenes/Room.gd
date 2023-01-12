@@ -57,4 +57,6 @@ func _on_touch_hold_timeout():
 
 
 func next_scene():
+	TA.hold_end()
+	
 	get_tree().change_scene("res://Scenes/Forest_1.tscn")
