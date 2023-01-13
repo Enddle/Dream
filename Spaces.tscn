@@ -20,55 +20,55 @@ anchor_bottom = 1.0
 color = Color( 0, 0, 0, 1 )
 
 [node name="room" type="TextureButton" parent="."]
-margin_left = 19.0
+margin_left = 166.0
 margin_top = 141.0
-margin_right = 934.0
+margin_right = 787.0
 margin_bottom = 1038.0
 texture_normal = ExtResource( 4 )
 expand = true
 stretch_mode = 5
 
 [node name="forest" type="TextureButton" parent="."]
-margin_left = 770.0
-margin_top = 97.0
-margin_right = 1462.0
-margin_bottom = 807.0
+margin_left = 869.0
+margin_top = 222.0
+margin_right = 1383.0
+margin_bottom = 754.0
 texture_normal = ExtResource( 2 )
 expand = true
 stretch_mode = 5
 
 [node name="stars" type="TextureButton" parent="."]
-margin_left = 1204.0
-margin_top = -110.0
-margin_right = 2307.0
-margin_bottom = 976.0
+margin_left = 1241.0
+margin_top = 108.0
+margin_right = 2083.0
+margin_bottom = 946.0
 texture_normal = ExtResource( 1 )
 expand = true
 stretch_mode = 5
 
 [node name="textout" type="TextureButton" parent="."]
-margin_left = 358.0
-margin_top = 623.0
-margin_right = 1050.0
-margin_bottom = 1333.0
+margin_left = 354.0
+margin_top = 746.0
+margin_right = 859.0
+margin_bottom = 1270.0
 texture_normal = ExtResource( 5 )
 expand = true
 stretch_mode = 5
 
 [node name="textin" type="TextureButton" parent="."]
-margin_left = 1018.0
-margin_top = 702.0
-margin_right = 1542.0
-margin_bottom = 1239.0
+margin_left = 887.0
+margin_top = 726.0
+margin_right = 1487.0
+margin_bottom = 1339.0
 texture_normal = ExtResource( 6 )
 expand = true
 stretch_mode = 5
 
 [node name="lightning" type="TextureButton" parent="."]
-margin_left = 1483.0
-margin_top = 1000.0
-margin_right = 1923.0
-margin_bottom = 1423.0
+margin_left = 1652.0
+margin_top = 918.0
+margin_right = 2092.0
+margin_bottom = 1341.0
 texture_normal = ExtResource( 3 )
 expand = true
 stretch_mode = 5
