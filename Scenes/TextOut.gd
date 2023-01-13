@@ -23,6 +23,9 @@ func light_on_anim_ends():
 func _ready():
 	Connect.sendudp("5")
 	
+	if SceneHelper.isSpaces:
+		$exit.visible = true
+	
 	randomize()
 	timetick = OS.get_ticks_msec()
 	
@@ -100,4 +103,13 @@ func next_scene():
 	
 	SceneHelper.fade_to_black(0, 2.5)
 	SceneHelper.rounds = 1
-	get_tree().change_scene("res://Scenes/Forest_2.tscn")
+	
+	if SceneHelper.isSpaces:
+		get_tree().change_scene("res://Spaces.tscn")
+	else:
+		get_tree().change_scene("res://Scenes/Forest_2.tscn")
+
+
+func _on_exit_pressed():
+	AuH.rand_note(rand_range(-20, 0), .0, "Reverb")
+	next_scene()

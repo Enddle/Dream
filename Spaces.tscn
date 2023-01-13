@@ -1,0 +1,95 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://src/imgs/spaces/3.png" type="Texture" id=1]
+[ext_resource path="res://src/imgs/spaces/2.png" type="Texture" id=2]
+[ext_resource path="res://src/imgs/spaces/6.png" type="Texture" id=3]
+[ext_resource path="res://src/imgs/spaces/1.png" type="Texture" id=4]
+[ext_resource path="res://src/imgs/spaces/4.png" type="Texture" id=5]
+[ext_resource path="res://src/imgs/spaces/5.png" type="Texture" id=6]
+[ext_resource path="res://Spaces.gd" type="Script" id=7]
+[ext_resource path="res://src/dot.png" type="Texture" id=8]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 7 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="room" type="TextureButton" parent="."]
+margin_left = 19.0
+margin_top = 141.0
+margin_right = 934.0
+margin_bottom = 1038.0
+texture_normal = ExtResource( 4 )
+expand = true
+stretch_mode = 5
+
+[node name="forest" type="TextureButton" parent="."]
+margin_left = 770.0
+margin_top = 97.0
+margin_right = 1462.0
+margin_bottom = 807.0
+texture_normal = ExtResource( 2 )
+expand = true
+stretch_mode = 5
+
+[node name="stars" type="TextureButton" parent="."]
+margin_left = 1204.0
+margin_top = -110.0
+margin_right = 2307.0
+margin_bottom = 976.0
+texture_normal = ExtResource( 1 )
+expand = true
+stretch_mode = 5
+
+[node name="textout" type="TextureButton" parent="."]
+margin_left = 358.0
+margin_top = 623.0
+margin_right = 1050.0
+margin_bottom = 1333.0
+texture_normal = ExtResource( 5 )
+expand = true
+stretch_mode = 5
+
+[node name="textin" type="TextureButton" parent="."]
+margin_left = 1018.0
+margin_top = 702.0
+margin_right = 1542.0
+margin_bottom = 1239.0
+texture_normal = ExtResource( 6 )
+expand = true
+stretch_mode = 5
+
+[node name="lightning" type="TextureButton" parent="."]
+margin_left = 1483.0
+margin_top = 1000.0
+margin_right = 1923.0
+margin_bottom = 1423.0
+texture_normal = ExtResource( 3 )
+expand = true
+stretch_mode = 5
+
+[node name="exit" type="Button" parent="."]
+modulate = Color( 1, 1, 1, 0.196078 )
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -1092.0
+margin_top = 80.0
+margin_right = -80.0
+margin_bottom = 1086.0
+rect_scale = Vector2( 0.03, 0.03 )
+rect_pivot_offset = Vector2( 1012, 0 )
+icon = ExtResource( 8 )
+flat = true
+
+[connection signal="pressed" from="room" to="." method="_on_room_pressed"]
+[connection signal="pressed" from="forest" to="." method="_on_forest_pressed"]
+[connection signal="pressed" from="stars" to="." method="_on_stars_pressed"]
+[connection signal="pressed" from="textout" to="." method="_on_textout_pressed"]
+[connection signal="pressed" from="textin" to="." method="_on_textin_pressed"]
+[connection signal="pressed" from="lightning" to="." method="_on_lightning_pressed"]
+[connection signal="pressed" from="exit" to="." method="_on_exit_pressed"]

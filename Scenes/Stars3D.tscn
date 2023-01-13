@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scenes/Stars3D.gd" type="Script" id=1]
 [ext_resource path="res://src/fonts/hint_font.tres" type="DynamicFont" id=2]
+[ext_resource path="res://src/dot.png" type="Texture" id=3]
 
 [sub_resource type="Environment" id=1]
 glow_enabled = true
@@ -85,4 +86,19 @@ custom_fonts/font = ExtResource( 2 )
 wait_time = 0.2
 one_shot = true
 
+[node name="exit" type="Button" parent="."]
+visible = false
+modulate = Color( 1, 1, 1, 0.196078 )
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -1092.0
+margin_top = 80.0
+margin_right = -80.0
+margin_bottom = 1086.0
+rect_scale = Vector2( 0.03, 0.03 )
+rect_pivot_offset = Vector2( 1012, 0 )
+icon = ExtResource( 3 )
+flat = true
+
 [connection signal="timeout" from="add_star_timer" to="." method="_on_add_star_timeout"]
+[connection signal="pressed" from="exit" to="." method="_on_exit_pressed"]

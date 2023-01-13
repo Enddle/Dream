@@ -16,6 +16,9 @@ onready var anim_tree = $Eye/AnimationTree
 func _ready():
 	Connect.sendudp("2")
 	
+	if SceneHelper.isSpaces:
+		$exit.visible = true
+	
 	anim_tree.active = true
 	state_machine = anim_tree["parameters/playback"]
 	
@@ -106,3 +109,9 @@ func pass_eye():
 func remove_eye():
 	$Eye.queue_free()
 
+
+
+func _on_exit_pressed():
+	AuH.rand_note(rand_range(-20, 0), .0, "Reverb")
+	
+	forest.next_scene()

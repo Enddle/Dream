@@ -82,6 +82,9 @@ onready var text_con = $World/Texts
 
 func _ready():
 	
+	if SceneHelper.isSpaces:
+		$exit.visible = true
+	
 	$Anim.play("arrow_indicate")
 	indicator_show = true
 	
@@ -213,3 +216,8 @@ func next_scene():
 func end_scenes():
 	get_tree().change_scene("res://EndCredits.tscn")
 	pass
+
+
+func _on_exit_pressed():
+	AuH.rand_note(rand_range(-20, 0), .0, "Reverb")
+	get_tree().change_scene("res://Spaces.tscn")

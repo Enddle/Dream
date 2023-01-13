@@ -11,7 +11,7 @@ const hints = [
 
 var tween
 var anim_playing = false
-var current_step = 0
+var current_step = 1
 var total_movement = 0.0
 var presstime = 0
 var touch_count = 0

@@ -13,6 +13,7 @@ var isMobile
 var isStarting = false
 var isTutorial = false
 var isCredit = false
+var isSpaces = false
 
 var scene_out = false
 var timetick = OS.get_ticks_msec()

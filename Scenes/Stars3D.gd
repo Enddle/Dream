@@ -20,6 +20,9 @@ func _ready():
 	
 	Connect.resetbang()
 	
+	if SceneHelper.isSpaces:
+		$exit.visible = true
+	
 	if SceneHelper.rounds == 0:
 		AuH._BG(AuH.SPACE_BG)
 		Connect.sendudp("3")
@@ -88,6 +91,12 @@ func next_scene():
 		AuH._FX(AuH.ZOOM_FX, .0, .0)
 		
 		yield(get_tree().create_timer(.25), "timeout")
+	
+	if SceneHelper.isSpaces:
+		get_tree().change_scene("res://Spaces.tscn")
+	else:
+		get_tree().change_scene("res://Scenes/TextIn.tscn")
 
-	get_tree().change_scene("res://Scenes/TextIn.tscn")
 
+func _on_exit_pressed():
+	next_scene()

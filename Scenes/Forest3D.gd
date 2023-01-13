@@ -15,6 +15,8 @@ var step_dura = 1.0
 var steps = 20
 var step_left = 1
 
+var scene_out = false
+
 onready var tree_con = $World/trees
 onready var leaf_bg = $World/leaf_bg
 
@@ -145,4 +147,13 @@ func reset_step():
 
 
 func next_scene():
-	get_tree().change_scene("res://Scenes/Stars3D.tscn")
+	if scene_out: return
+	scene_out = true
+	
+	if SceneHelper.isSpaces:
+		SceneHelper.fade_to_black(1, 1)
+		yield(get_tree().create_timer(1), "timeout")
+		SceneHelper.isStarting = false
+		get_tree().change_scene("res://Spaces.tscn")
+	else:
+		get_tree().change_scene("res://Scenes/Stars3D.tscn")

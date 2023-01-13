@@ -4,6 +4,7 @@ var nextThunder = 0
 
 func _ready():
 	Connect.sendudp("6")
+	Connect.sendextra("0")
 	
 	AuH._BG(AuH.RAIN_BG, .0, .0)
 	$Forest.touch_enabled = true
