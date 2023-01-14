@@ -1,10 +1,10 @@
 extends Node
 
 
-var IP_ADDR = "192.168.137.1"
-var IP_PORT_0 = 7000
-var IP_PORT_1 = 7001
-var IP_PORT_2 = 7002
+var IP_ADDR = "192.168.0.47"
+var IP_PORT_0 = 7001
+var IP_PORT_1 = 7002
+var IP_PORT_2 = 7003
 
 var bang = 0
 

@@ -51,7 +51,7 @@ margin_top = -357.0
 margin_right = 130.0
 margin_bottom = -273.0
 custom_fonts/font = ExtResource( 2 )
-text = "192.168.137.1"
+text = "192.168.0.47"
 caret_blink = true
 caret_blink_speed = 0.5
 
@@ -65,7 +65,7 @@ margin_top = -357.0
 margin_right = 344.0
 margin_bottom = -273.0
 custom_fonts/font = ExtResource( 2 )
-text = "7000"
+text = "7001"
 caret_blink = true
 caret_blink_speed = 0.5
 

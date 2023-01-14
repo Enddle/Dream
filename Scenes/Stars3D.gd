@@ -22,8 +22,9 @@ func _ready():
 	
 	if SceneHelper.isSpaces:
 		$exit.visible = true
+		Connect.sendudp("3")
 	
-	if SceneHelper.rounds == 0:
+	elif SceneHelper.rounds == 0:
 		AuH._BG(AuH.SPACE_BG)
 		Connect.sendudp("3")
 		
@@ -37,7 +38,7 @@ func _process(delta):
 	if scene_out:
 		return
 	
-	if OS.get_ticks_msec() / 1000 - timetick > 30:
+	if !SceneHelper.isSpaces and OS.get_ticks_msec() / 1000 - timetick > 30:
 		next_scene()
 		scene_out = true
 	
