@@ -17,8 +17,8 @@ var step_left = 1
 
 var scene_out = false
 
-onready var tree_con = $World/trees
-onready var leaf_bg = $World/leaf_bg
+@onready var tree_con = $World/trees
+@onready var leaf_bg = $World/leaf_bg
 
 
 func _ready():
@@ -26,7 +26,7 @@ func _ready():
 	
 	random_trees_all()
 	
-	for x in AudioServer.get_device_list():
+	for x in AudioServer.get_output_device_list():
 		$Label.text += x + '\n'
 
 
@@ -49,8 +49,8 @@ func random_trees_init(amount):
 
 
 func random_tree_init(invx, invz):
-	var randx = rand_range(1, 60)
-	var randz = rand_range(1, 60)
+	var randx = randf_range(1, 60)
+	var randz = randf_range(1, 60)
 	if invx: randx = -randx
 	if invz: randz = -randz
 	var randpos = Vector3(randx, 0, randz)
@@ -60,7 +60,7 @@ func random_tree_init(invx, invz):
 
 func random_tree_front():
 	# get random position around the circle (r: 80)
-	var randx = rand_range(-25, 25)
+	var randx = randf_range(-25, 25)
 	var z = -sqrt(6400.0 - randx * randx)
 	var randpos = Vector3(randx, 0, z)
 	
@@ -76,9 +76,9 @@ func random_tree_front():
 
 
 func add_tree_at(pos):
-	var tree = tree_sprite.instance()
+	var tree = tree_sprite.instantiate()
 	tree_con.add_child(tree)
-	tree.global_translation = pos
+	tree.global_position = pos
 
 
 var touch_enabled = false
@@ -120,24 +120,24 @@ func walk_step():
 	
 	tween = create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	# move towards direction at speed
-	tween.tween_property(tree_con, "translation", dir * step_speed, step_dura).as_relative()
-	tween.parallel().tween_property(leaf_bg, "translation", dir * step_speed, step_dura).as_relative()
+	tween.tween_property(tree_con, "position", dir * step_speed, step_dura).as_relative()
+	tween.parallel().tween_property(leaf_bg, "position", dir * step_speed, step_dura).as_relative()
 	# body move up from step up
-	tween.parallel().tween_property(world, "global_translation:y", -.8, step_dura / 2)
+	tween.parallel().tween_property(world, "global_position:y", -.8, step_dura / 2)
 	# body move left / right
 	step_left *= -1
-	tween.parallel().tween_property(world, "translation:x", .8 * step_left, step_dura)
+	tween.parallel().tween_property(world, "position:x", .8 * step_left, step_dura)
 	# step finished, can skip later animations
-	tween.tween_callback(self, "allow_step")
+	tween.tween_callback(Callable(self, "allow_step"))
 	
 	# body move down from step down
-	tween.tween_property(world, "translation:y", .0, .4)
+	tween.tween_property(world, "position:y", .0, .4)
 	# reset speed when stops after a delay
-	tween.tween_callback(self, "reset_step").set_delay(.5)
+	tween.tween_callback(Callable(self, "reset_step")).set_delay(.5)
 
 func allow_step():
-	leaf_bg.global_translation.x = fmod(leaf_bg.global_translation.x, 5.26)
-	leaf_bg.global_translation.z = fmod(leaf_bg.global_translation.z, 3.505)
+	leaf_bg.global_position.x = fmod(leaf_bg.global_position.x, 5.26)
+	leaf_bg.global_position.z = fmod(leaf_bg.global_position.z, 3.505)
 #	print(leaf_bg.global_translation.z)
 	step_allowed = true
 
@@ -152,8 +152,8 @@ func next_scene():
 	
 	if SceneHelper.isSpaces:
 		SceneHelper.fade_to_black(1, 1)
-		yield(get_tree().create_timer(1), "timeout")
+		await get_tree().create_timer(1).timeout
 		SceneHelper.isStarting = false
-		get_tree().change_scene("res://Spaces.tscn")
+		get_tree().change_scene_to_file("res://Spaces.tscn")
 	else:
-		get_tree().change_scene("res://Scenes/Stars3D.tscn")
+		get_tree().change_scene_to_file("res://Scenes/Stars3D.tscn")

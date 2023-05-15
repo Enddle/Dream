@@ -11,7 +11,7 @@ var touched = false
 var touched_hint_delay = 4000
 var timetick
 
-onready var text_con = $World/Texts
+@onready var text_con = $World/Texts
 
 var main_text
 
@@ -34,17 +34,17 @@ func _ready():
 		$exit.visible = true
 	
 	randomize()
-	timetick = OS.get_ticks_msec()
+	timetick = Time.get_ticks_msec()
 	
 	$Anim.play("light_on")
 	
 	for n in covers:
-		var tc = textcover.instance()
+		var tc = textcover.instantiate()
 		
-		var x = rand_range(-2, 2)
-		var y = rand_range(-1.5, 1.5)
+		var x = randf_range(-2, 2)
+		var y = randf_range(-1.5, 1.5)
 		
-		tc.translation = Vector3(x, y, rand_range(-2, -4))
+		tc.position = Vector3(x, y, randf_range(-2, -4))
 		
 		text_con.add_child(tc)
 
@@ -52,7 +52,7 @@ func _ready():
 func _process(delta):
 	
 	if !touched:
-		if OS.get_ticks_msec() > timetick + touched_hint_delay:
+		if Time.get_ticks_msec() > timetick + touched_hint_delay:
 			Hint.show_hint("画面に触れて、しばらくしたら離す。", false)
 			touched_hint_delay += 4000
 	
@@ -60,7 +60,7 @@ func _process(delta):
 	if covers < 30:
 		scene_out = true
 		$Anim.play("light_off")
-		yield(get_tree().create_timer(4.0), "timeout")
+		await get_tree().create_timer(4.0).timeout
 		next_scene()
 	
 	if !isMobile:
@@ -81,21 +81,21 @@ func _input(event):
 		
 		if tween: tween.kill()
 		tween = create_tween().set_ease(Tween.EASE_IN)
-		tween.tween_property(main_text, "translation:z", -12.0, 2.0)
+		tween.tween_property(main_text, "position:z", -12.0, 2.0)
 		
 		TA.hold_start(event.position)
 
 	if event is InputEventMouseButton and !event.is_pressed():
 #		print("Mouse Unclick at: ", event.position)
 		
-		fly_out_f = (main_text.translation.z + 10) / 2
+		fly_out_f = (main_text.position.z + 10) / 2
 		if fly_out_f <= -.01:
 			touched = true
 		
 		if tween: tween.kill()
 		tween = create_tween().set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
-		tween.tween_property(main_text, "translation:z", -10.0, 1.0)
-		tween.parallel().tween_callback(self, "fly_out")
+		tween.tween_property(main_text, "position:z", -10.0, 1.0)
+		tween.parallel().tween_callback(Callable(self, "fly_out"))
 		TA.hold_end()
 
 
@@ -112,13 +112,13 @@ func next_scene():
 	SceneHelper.rounds = 1
 	
 	if SceneHelper.isSpaces:
-		get_tree().change_scene("res://Spaces.tscn")
+		get_tree().change_scene_to_file("res://Spaces.tscn")
 	else:
-		get_tree().change_scene("res://Scenes/Forest_2.tscn")
+		get_tree().change_scene_to_file("res://Scenes/Forest_2.tscn")
 
 
 func _on_exit_pressed():
-	AuH.rand_note(rand_range(-20, 0), .0, "Reverb")
+	AuH.rand_note(randf_range(-20, 0), .0, "Reverb")
 	next_scene()
 <<<<<<< Updated upstream
 =======

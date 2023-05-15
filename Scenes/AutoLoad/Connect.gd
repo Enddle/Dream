@@ -18,18 +18,18 @@ func update(ip, port):
 
 func sendudp(msg):
 	socketUDP.set_dest_address(IP_ADDR, IP_PORT_0)
-	socketUDP.put_packet(msg.to_ascii())
+	socketUDP.put_packet(msg.to_ascii_buffer())
 
 func sendextra(val):
 	socketUDP.set_dest_address(IP_ADDR, IP_PORT_1)
-	socketUDP.put_packet((val as String).to_ascii())
+	socketUDP.put_packet((val as String).to_ascii_buffer())
 
 func resetbang():
 	bang = 0
 	socketUDP.set_dest_address(IP_ADDR, IP_PORT_2)
-	socketUDP.put_packet((bang as String).to_ascii())
+	socketUDP.put_packet((bang as String).to_ascii_buffer())
 
 func sendbang():
 	bang += 1
 	socketUDP.set_dest_address(IP_ADDR, IP_PORT_2)
-	socketUDP.put_packet((bang as String).to_ascii())
+	socketUDP.put_packet((bang as String).to_ascii_buffer())

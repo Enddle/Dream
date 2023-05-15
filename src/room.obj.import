@@ -11,7 +11,7 @@ dest_files=[ "res://.import/room.obj-efaf789fc8f16f6d8600690ce7ff0398.scn" ]
 
 [params]
 
-nodes/root_type="Spatial"
+nodes/root_type="Node3D"
 nodes/root_name="Scene Root"
 nodes/root_scale=10.0
 nodes/custom_script=""

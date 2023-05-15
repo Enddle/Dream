@@ -11,6 +11,6 @@ func _ready():
 
 
 func _process(delta):
-	if randf() < 0.005 && OS.get_ticks_msec() > nextThunder:
-		nextThunder = OS.get_ticks_msec() + 350
+	if randf() < 0.005 && Time.get_ticks_msec() > nextThunder:
+		nextThunder = Time.get_ticks_msec() + 350
 		Connect.sendbang()

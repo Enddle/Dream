@@ -1,11 +1,11 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scenes/AutoLoad/SceneHelper.gd" type="Script" id=1]
-[ext_resource path="res://src/fonts/hint_font.tres" type="DynamicFont" id=2]
-[ext_resource path="res://src/dot.png" type="Texture" id=3]
-[ext_resource path="res://src/icons/icon_cancel.png" type="Texture" id=4]
-[ext_resource path="res://src/icons/icon_back.png" type="Texture" id=5]
-[ext_resource path="res://src/imgs/progress_round.png" type="Texture" id=6]
+[ext_resource path="res://src/fonts/hint_font.tres" type="FontFile" id=2]
+[ext_resource path="res://src/dot.png" type="Texture2D" id=3]
+[ext_resource path="res://src/icons/icon_cancel.png" type="Texture2D" id=4]
+[ext_resource path="res://src/icons/icon_back.png" type="Texture2D" id=5]
+[ext_resource path="res://src/imgs/progress_round.png" type="Texture2D" id=6]
 
 [node name="Node" type="CanvasLayer"]
 layer = 2
@@ -21,10 +21,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -1133.0
-margin_top = -744.0
-margin_right = 1133.0
-margin_bottom = 744.0
+offset_left = -1133.0
+offset_top = -744.0
+offset_right = 1133.0
+offset_bottom = 744.0
 color = Color( 0, 0, 0, 0.666667 )
 
 [node name="Label" type="Label" parent="settings_screen"]
@@ -32,11 +32,11 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -280.0
-margin_top = -475.0
-margin_right = 280.0
-margin_bottom = -419.0
-custom_fonts/font = ExtResource( 2 )
+offset_left = -280.0
+offset_top = -475.0
+offset_right = 280.0
+offset_bottom = -419.0
+theme_override_fonts/font = ExtResource( 2 )
 text = "SETTINGS"
 align = 1
 valign = 1
@@ -46,45 +46,45 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -348.0
-margin_top = -357.0
-margin_right = 130.0
-margin_bottom = -273.0
-custom_fonts/font = ExtResource( 2 )
+offset_left = -348.0
+offset_top = -357.0
+offset_right = 130.0
+offset_bottom = -273.0
+theme_override_fonts/font = ExtResource( 2 )
 text = "192.168.0.47"
 caret_blink = true
-caret_blink_speed = 0.5
+caret_blink_interval = 0.5
 
 [node name="port" type="LineEdit" parent="settings_screen"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = 139.0
-margin_top = -357.0
-margin_right = 344.0
-margin_bottom = -273.0
-custom_fonts/font = ExtResource( 2 )
+offset_left = 139.0
+offset_top = -357.0
+offset_right = 344.0
+offset_bottom = -273.0
+theme_override_fonts/font = ExtResource( 2 )
 text = "7001"
 caret_blink = true
-caret_blink_speed = 0.5
+caret_blink_interval = 0.5
 
 [node name="save" type="Button" parent="settings_screen"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -165.0
+offset_left = -165.0
 <<<<<<< Updated upstream
-margin_top = -166.0
-margin_right = 165.0
-margin_bottom = -88.0
+offset_top = -166.0
+offset_right = 165.0
+offset_bottom = -88.0
 =======
-margin_top = -35.0
-margin_right = 165.0
-margin_bottom = 43.0
+offset_top = -35.0
+offset_right = 165.0
+offset_bottom = 43.0
 >>>>>>> Stashed changes
-custom_fonts/font = ExtResource( 2 )
+theme_override_fonts/font = ExtResource( 2 )
 text = "  SAVE & CLOSE  "
 
 [node name="return_screen" type="Control" parent="."]
@@ -97,10 +97,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -1133.0
-margin_top = -744.0
-margin_right = 1133.0
-margin_bottom = 744.0
+offset_left = -1133.0
+offset_top = -744.0
+offset_right = 1133.0
+offset_bottom = 744.0
 color = Color( 0, 0, 0, 0.666667 )
 
 [node name="Label" type="Label" parent="return_screen"]
@@ -108,11 +108,11 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -280.0
-margin_top = -160.0
-margin_right = 280.0
-margin_bottom = -104.0
-custom_fonts/font = ExtResource( 2 )
+offset_left = -280.0
+offset_top = -160.0
+offset_right = 280.0
+offset_bottom = -104.0
+theme_override_fonts/font = ExtResource( 2 )
 text = "スタートページに戻りますか？"
 align = 1
 valign = 1
@@ -123,12 +123,12 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -1074.0
-margin_top = -11.0
-margin_right = -62.0
-margin_bottom = 995.0
-rect_scale = Vector2( 0.25, 0.25 )
-rect_pivot_offset = Vector2( 1012, 0 )
+offset_left = -1074.0
+offset_top = -11.0
+offset_right = -62.0
+offset_bottom = 995.0
+scale = Vector2( 0.25, 0.25 )
+pivot_offset = Vector2( 1012, 0 )
 icon = ExtResource( 3 )
 flat = true
 
@@ -136,22 +136,22 @@ flat = true
 modulate = Color( 1, 1, 1, 0.627451 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 235.0
-margin_top = 235.0
-margin_right = 570.0
-margin_bottom = 575.0
-rect_scale = Vector2( 0.4, 0.4 )
+offset_left = 235.0
+offset_top = 235.0
+offset_right = 570.0
+offset_bottom = 575.0
+scale = Vector2( 0.4, 0.4 )
 texture = ExtResource( 5 )
 
-[node name="countdown" type="TextureProgress" parent="return_screen/back"]
+[node name="countdown" type="TextureProgressBar" parent="return_screen/back"]
 modulate = Color( 1, 1, 1, 0.254902 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 105.0
-margin_top = 103.0
-margin_right = -395.0
-margin_bottom = -391.0
-rect_scale = Vector2( 1.565, 1.565 )
+offset_left = 105.0
+offset_top = 103.0
+offset_right = -395.0
+offset_bottom = -391.0
+scale = Vector2( 1.565, 1.565 )
 value = 100.0
 texture_under = ExtResource( 6 )
 texture_progress = ExtResource( 6 )
@@ -165,12 +165,12 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -702.0
-margin_top = -11.0
-margin_right = 310.0
-margin_bottom = 995.0
-rect_scale = Vector2( 0.25, 0.25 )
-rect_pivot_offset = Vector2( 1012, 0 )
+offset_left = -702.0
+offset_top = -11.0
+offset_right = 310.0
+offset_bottom = 995.0
+scale = Vector2( 0.25, 0.25 )
+pivot_offset = Vector2( 1012, 0 )
 icon = ExtResource( 3 )
 flat = true
 
@@ -178,11 +178,11 @@ flat = true
 modulate = Color( 1, 1, 1, 0.627451 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 235.0
-margin_top = 235.0
-margin_right = 570.0
-margin_bottom = 575.0
-rect_scale = Vector2( 0.4, 0.4 )
+offset_left = 235.0
+offset_top = 235.0
+offset_right = 570.0
+offset_bottom = 575.0
+scale = Vector2( 0.4, 0.4 )
 texture = ExtResource( 4 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -192,9 +192,9 @@ anchor_bottom = 1.0
 mouse_filter = 2
 
 [node name="Label" type="Label" parent="."]
-margin_right = 40.0
-margin_bottom = 14.0
-custom_fonts/font = ExtResource( 2 )
+offset_right = 40.0
+offset_bottom = 14.0
+theme_override_fonts/font = ExtResource( 2 )
 
 [connection signal="pressed" from="settings_screen/save" to="." method="_on_settings_save_pressed"]
 [connection signal="button_down" from="return_screen/back" to="." method="_on_return_back_down"]

@@ -1,7 +1,7 @@
 extends Node
 
-onready var cam = $Camera
-onready var world = $World
+@onready var cam = $Camera3D
+@onready var world = $World
 
 var isMobile = false
 var center_rad = 0.0
@@ -35,7 +35,7 @@ func _process(delta):
 			return
 		
 		center_rad = Vector3.UP.signed_angle_to(world.transform.basis.z, Vector3.FORWARD)
-		center_angle = stepify(rad2deg(center_rad), 0.01)
+		center_angle = snapped(rad_to_deg(center_rad), 0.01)
 		
 		var proj_disx = world.transform.basis.z.project(Vector3.RIGHT).x
 		var proj_disy = world.transform.basis.z.project(Vector3.UP).y
@@ -58,10 +58,10 @@ func _process(delta):
 #		$Label.text += String(stepify(rad2deg(angle), 0.1)) + "\n"
 #		Vector3.FORWARD.project(world.transform.basis.z)
 
-		$arrow_pos/arrow.rect_rotation = center_angle
-		$arrow_pos.rect_position = indicator_pos
-		$arrow_pos.rect_position.x *= 1000
-		$arrow_pos.rect_position.y *= 600
+		$arrow_pos/arrow.rotation = center_angle
+		$arrow_pos.position = indicator_pos
+		$arrow_pos.position.x *= 1000
+		$arrow_pos.position.y *= 600
 		$arrow_pos.visible = center_away
 
 

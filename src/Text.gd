@@ -1,16 +1,16 @@
-extends Spatial
+extends Node3D
 
 
 var accel = Vector3.ZERO
 var speed = Vector3.ZERO
 var center_pos = Vector3.ZERO
 
-onready var t = $Text
+@onready var t = $Text
 
 
 func init(character, position):
 	$Text.text = character
-	translation = position
+	position = position
 
 
 func _ready():
@@ -36,8 +36,8 @@ func _process(delta):
 		react_center(3)
 	
 	# go back to center if too far away
-	elif t.translation.distance_squared_to(center_pos) > .2:
-		accel += (center_pos - t.translation).normalized() * .5
+	elif t.position.distance_squared_to(center_pos) > .2:
+		accel += (center_pos - t.position).normalized() * .5
 	
 	# move accordingly
 	speed += .5 * accel * delta
@@ -47,7 +47,7 @@ func _process(delta):
 func react_center(mode):
 	# MODE 0: slow down and go back to original place
 	if mode == 0 || mode == 2:
-		accel = -t.translation * 2
+		accel = -t.position * 2
 		speed *= .9
 	
 	# MODE 1: speed up
@@ -57,7 +57,7 @@ func react_center(mode):
 	
 	# MODE 3: cover camera
 	elif mode == 3:
-		accel = center_pos - t.translation
+		accel = center_pos - t.position
 		speed *= .96
 
 
@@ -67,7 +67,7 @@ const tres_dist = 2 * tres * tres
 # return the distance percentage from center
 # return -1 when not in center area
 func at_center() -> float:
-	var tr = t.global_translation
+	var tr = t.global_position
 	if tr.x < tres &&  tr.x > -tres && tr.y < tres && tr.y > -tres:
 		return 1 - sqrt((tr.x * tr.x + tr.y * tr.y) / tres_dist)
 	else:
@@ -75,7 +75,7 @@ func at_center() -> float:
 
 
 func update_center():
-	center_pos -= translation
+	center_pos -= position
 	
 #	center_pos.x += randf()-.5
 #	center_pos.y += randf()-.5

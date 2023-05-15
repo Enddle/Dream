@@ -3,18 +3,18 @@ extends Node2D
 
 const color_seqs = [
 	[
-		[Color.black,     8],
-		[Color.darkgray,  5],
+		[Color.BLACK,     8],
+		[Color.DARK_GRAY,  5],
 	],
 	[
-		[Color.darkred,   1],
+		[Color.DARK_RED,   1],
 	],
 	[
-		[Color.darkblue,  1],
-		[Color.darkgray,  5],
+		[Color.DARK_BLUE,  1],
+		[Color.DARK_GRAY,  5],
 	],
 	[
-		[Color.black,     3],
+		[Color.BLACK,     3],
 	],
 ]
 
@@ -24,7 +24,7 @@ var current_seq = 0
 
 
 func _ready():
-	modulate = Color.black
+	modulate = Color.BLACK
 
 
 func start_seq(seq):
@@ -37,9 +37,9 @@ func start_seq(seq):
 	var n = 0
 	for c in color_seqs[seq]:
 		tween.tween_property(self, "modulate", c[0], c[1])
-		tween.tween_callback(self, "seq_step", [seq, n])
+		tween.tween_callback(Callable(self, "seq_step").bind(seq, n))
 		n += 1
-	tween.tween_callback(self, "seq_step", [seq, -1])
+	tween.tween_callback(Callable(self, "seq_step").bind(seq, -1))
 #	print("Dynamic Color seq " + String(seq) + " starts")
 
 

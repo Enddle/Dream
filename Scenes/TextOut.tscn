@@ -1,10 +1,10 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://src/fonts/text_scene_font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://src/fonts/text_scene_font.tres" type="FontFile" id=1]
 [ext_resource path="res://Scenes/TextOut.gd" type="Script" id=2]
-[ext_resource path="res://src/fonts/hint_font.tres" type="DynamicFont" id=3]
-[ext_resource path="res://src/icons/arrow.png" type="Texture" id=4]
-[ext_resource path="res://src/dot.png" type="Texture" id=5]
+[ext_resource path="res://src/fonts/hint_font.tres" type="FontFile" id=3]
+[ext_resource path="res://src/icons/arrow.png" type="Texture2D" id=4]
+[ext_resource path="res://src/dot.png" type="Texture2D" id=5]
 
 [sub_resource type="Environment" id=1]
 background_mode = 1
@@ -13,14 +13,14 @@ background_mode = 1
 resource_name = "arrow_indicate"
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("arrow_pos/arrow:rect_position")
+tracks/0/path = NodePath("arrow_pos/arrow:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array( 0, 1 ),
+"transitions": PackedFloat32Array( 1, 1 ),
 "update": 0,
 "values": [ Vector2( 878, 654 ), Vector2( 878, 604 ) ]
 }
@@ -31,8 +31,8 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.8, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array( 0.8, 1 ),
+"transitions": PackedFloat32Array( 1, 1 ),
 "update": 0,
 "values": [ Color( 0.501961, 0.501961, 0.501961, 0.501961 ), Color( 0.501961, 0.501961, 0.501961, 0 ) ]
 }
@@ -41,14 +41,14 @@ tracks/1/keys = {
 resource_name = "light_off"
 length = 4.0
 tracks/0/type = "value"
-tracks/0/path = NodePath("Camera/SpotLight:light_energy")
+tracks/0/path = NodePath("Camera3D/SpotLight3D:light_energy")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 2 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array( 0, 2 ),
+"transitions": PackedFloat32Array( 1, 1 ),
 "update": 0,
 "values": [ 0.7, 0.0 ]
 }
@@ -59,20 +59,20 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 4 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array( 0, 4 ),
+"transitions": PackedFloat32Array( 1, 1 ),
 "update": 0,
 "values": [ 1.0, 0.0 ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("World/OmniLight:light_energy")
+tracks/2/path = NodePath("World/OmniLight3D:light_energy")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 4 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array( 0, 4 ),
+"transitions": PackedFloat32Array( 1, 1 ),
 "update": 0,
 "values": [ 0.5, 0.0 ]
 }
@@ -81,14 +81,14 @@ tracks/2/keys = {
 resource_name = "light_on"
 length = 2.2
 tracks/0/type = "value"
-tracks/0/path = NodePath("Camera/SpotLight:light_energy")
+tracks/0/path = NodePath("Camera3D/SpotLight3D:light_energy")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1.4, 2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PackedFloat32Array( 0, 1.4, 2 ),
+"transitions": PackedFloat32Array( 1, 1, 1 ),
 "update": 0,
 "values": [ 0.0, 0.0, 0.7 ]
 }
@@ -99,20 +99,20 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 1.6 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array( 0, 1.6 ),
+"transitions": PackedFloat32Array( 1, 1 ),
 "update": 0,
 "values": [ 0.0, 1.0 ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("World/OmniLight:light_energy")
+tracks/2/path = NodePath("World/OmniLight3D:light_energy")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 1.6 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array( 0, 1.6 ),
+"transitions": PackedFloat32Array( 1, 1 ),
 "update": 0,
 "values": [ 0.0, 0.5 ]
 }
@@ -123,8 +123,8 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 2.2 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 2.2 ),
+"transitions": PackedFloat32Array( 1 ),
 "values": [ {
 "args": [  ],
 "method": "light_on_anim_ends"
@@ -137,9 +137,9 @@ script = ExtResource( 2 )
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 1 )
 
-[node name="Camera" type="Camera" parent="."]
+[node name="Camera3D" type="Camera3D" parent="."]
 
-[node name="SpotLight" type="SpotLight" parent="Camera"]
+[node name="SpotLight3D" type="SpotLight3D" parent="Camera3D"]
 light_energy = 0.0
 light_indirect_energy = 0.0
 light_bake_mode = 0
@@ -148,12 +148,12 @@ spot_range = 30.0
 spot_attenuation = 2.0
 spot_angle = 15.0
 
-[node name="World" type="Spatial" parent="."]
+[node name="World" type="Node3D" parent="."]
 
-[node name="Texts" type="Spatial" parent="World"]
+[node name="Texts" type="Node3D" parent="World"]
 
 [node name="MainText_jp" type="Label3D" parent="World"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10 )
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10 )
 visible = false
 shaded = true
 text = "いつも
@@ -162,7 +162,7 @@ text = "いつも
 font = ExtResource( 1 )
 
 [node name="MainText_en" type="Label3D" parent="World"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10 )
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10 )
 visible = false
 shaded = true
 text = "and I always
@@ -170,13 +170,13 @@ found myself wandering
 in the same dream"
 font = ExtResource( 1 )
 
-[node name="OmniLight2" type="OmniLight" parent="World"]
+[node name="OmniLight2" type="OmniLight3D" parent="World"]
 light_energy = 0.0
 light_indirect_energy = 0.0
 light_bake_mode = 0
 shadow_enabled = true
 
-[node name="OmniLight" type="OmniLight" parent="World"]
+[node name="OmniLight3D" type="OmniLight3D" parent="World"]
 light_energy = 0.0
 light_indirect_energy = 0.0
 light_bake_mode = 0
@@ -185,9 +185,9 @@ omni_range = 15.0
 
 [node name="Label" type="Label" parent="."]
 visible = false
-margin_right = 40.0
-margin_bottom = 56.0
-custom_fonts/font = ExtResource( 3 )
+offset_right = 40.0
+offset_bottom = 56.0
+theme_override_fonts/font = ExtResource( 3 )
 
 [node name="Anim" type="AnimationPlayer" parent="."]
 anims/arrow_indicate = SubResource( 4 )
@@ -199,10 +199,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -1133.0
-margin_top = -744.0
-margin_right = -1093.0
-margin_bottom = -704.0
+offset_left = -1133.0
+offset_top = -744.0
+offset_right = -1093.0
+offset_bottom = -704.0
 
 [node name="arrow" type="TextureRect" parent="arrow_pos"]
 self_modulate = Color( 0.501961, 0.501961, 0.501961, 0 )
@@ -210,12 +210,12 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = 858.0
-margin_top = 634.0
-margin_right = 1370.0
-margin_bottom = 874.0
-rect_scale = Vector2( 0.6, 0.6 )
-rect_pivot_offset = Vector2( 256, 120 )
+offset_left = 858.0
+offset_top = 634.0
+offset_right = 1370.0
+offset_bottom = 874.0
+scale = Vector2( 0.6, 0.6 )
+pivot_offset = Vector2( 256, 120 )
 texture = ExtResource( 4 )
 
 [node name="exit" type="Button" parent="."]
@@ -223,14 +223,14 @@ visible = false
 modulate = Color( 1, 1, 1, 0.196078 )
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -1122.0
-margin_top = 50.0
-margin_right = 1902.0
-margin_bottom = 3056.0
-rect_scale = Vector2( 0.03, 0.03 )
-rect_pivot_offset = Vector2( 1012, 0 )
+offset_left = -1122.0
+offset_top = 50.0
+offset_right = 1902.0
+offset_bottom = 3056.0
+scale = Vector2( 0.03, 0.03 )
+pivot_offset = Vector2( 1012, 0 )
 icon = ExtResource( 5 )
 flat = true
-icon_align = 1
+icon_alignment = 1
 
 [connection signal="pressed" from="exit" to="." method="_on_exit_pressed"]

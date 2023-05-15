@@ -28,8 +28,8 @@ const ZOOM_FX = preload("res://Audio/zoom.mp3")
 var tween
 var tween1
 
-onready var BG = $BG
-onready var FX = $FX
+@onready var BG = $BG
+@onready var FX = $FX
 
 
 func _ready():
@@ -43,8 +43,8 @@ func _BG(file, vol=0.0, dur=2.0):
 		tween.tween_property(BG, "volume_db", -80.0, 1.0)
 	else:
 		BG.volume_db = -80.0
-	tween.tween_callback(self, "set_stream", [BG, file])
-	tween.tween_callback(self, "play_stream", [BG])
+	tween.tween_callback(Callable(self, "set_stream").bind(BG, file))
+	tween.tween_callback(Callable(self, "play_stream").bind(BG))
 	tween.tween_property(BG, "volume_db", vol, dur)
 
 
@@ -54,8 +54,8 @@ func _FX(file, vol=.0, dur=.2, bus="FX"):
 #	if FX.playing:
 #		tween1.tween_property(FX, "volume_db", -50.0, .1)
 	FX.bus = bus
-	tween1.tween_callback(self, "set_stream", [FX, file])
-	tween1.tween_callback(self, "play_stream", [FX])
+	tween1.tween_callback(Callable(self, "set_stream").bind(FX, file))
+	tween1.tween_callback(Callable(self, "play_stream").bind(FX))
 	
 	if dur != 0:
 		FX.volume_db = -50.0

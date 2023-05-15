@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://src/fonts/hint_font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://src/fonts/hint_font.tres" type="FontFile" id=1]
 [ext_resource path="res://EndCredits.gd" type="Script" id=2]
 
 [node name="Node" type="Node"]
@@ -16,11 +16,11 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -323.5
-margin_top = -116.5
-margin_right = 323.5
-margin_bottom = 116.5
-custom_fonts/font = ExtResource( 1 )
+offset_left = -323.5
+offset_top = -116.5
+offset_right = 323.5
+offset_bottom = 116.5
+theme_override_fonts/font = ExtResource( 1 )
 text = "「DREAM」
 
 
@@ -32,11 +32,11 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -258.0
-margin_top = -411.5
-margin_right = 258.0
-margin_bottom = 411.5
-custom_fonts/font = ExtResource( 1 )
+offset_left = -258.0
+offset_top = -411.5
+offset_right = 258.0
+offset_bottom = 411.5
+theme_override_fonts/font = ExtResource( 1 )
 text = "
 I can hear the silence
 inside the endless forest

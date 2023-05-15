@@ -9,8 +9,8 @@ var blink_times = 0
 
 var state_machine
 
-onready var forest = $Forest
-onready var anim_tree = $Eye/AnimationTree
+@onready var forest = $Forest
+@onready var anim_tree = $Eye/AnimationTree
 
 
 func _ready():
@@ -37,10 +37,10 @@ func blink():
 	Connect.sendbang()
 	
 	state_machine.travel("eye_blink")
-	yield(get_tree().create_timer(.4), "timeout")
+	await get_tree().create_timer(.4).timeout
 	forest.random_trees_all()
 	
-	yield(get_tree().create_timer(.7), "timeout")
+	await get_tree().create_timer(.7).timeout
 	blink_allowed = true
 
 
@@ -101,7 +101,7 @@ func pass_eye():
 	
 	var tween := create_tween()
 	tween.tween_property($Eye, "modulate:a", .0, 1.0)
-	tween.tween_callback(self, "remove_eye")
+	tween.tween_callback(Callable(self, "remove_eye"))
 	
 	Hint.show_hint("画面をタッチして歩き、出口を探す。", false)
 
@@ -112,6 +112,6 @@ func remove_eye():
 
 
 func _on_exit_pressed():
-	AuH.rand_note(rand_range(-20, 0), .0, "Reverb")
+	AuH.rand_note(randf_range(-20, 0), .0, "Reverb")
 	
 	forest.next_scene()

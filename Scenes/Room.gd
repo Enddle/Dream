@@ -15,14 +15,14 @@ func _process(delta):
 	if scene_out:
 		return
 	
-	AuH._vol(AuH.BG, (cam.translation.z / 40 - .5) * -12 + 6)
+	AuH._vol(AuH.BG, (cam.position.z / 40 - .5) * -12 + 6)
 	
-	Connect.sendextra(cam.translation.z / 40 - .5)
+	Connect.sendextra(cam.position.z / 40 - .5)
 	
 	if isPressed:
-		cam.translation.z -= 2.5 * delta
+		cam.position.z -= 2.5 * delta
 	
-	if cam.translation.z < 10.0 && !scene_out:
+	if cam.position.z < 10.0 && !scene_out:
 		next_scene()
 
 
@@ -47,8 +47,8 @@ func _input(event):
 			TA.touch(event.position)
 			
 			var tween := create_tween()
-			tween.tween_property(cam, "translation:z", -8.0, .7).as_relative().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-			tween.tween_property(cam, "translation:z", 8.0, 1.5).as_relative().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+			tween.tween_property(cam, "position:z", -8.0, .7).as_relative().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+			tween.tween_property(cam, "position:z", 8.0, 1.5).as_relative().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 		else:
 			TA.hold_end()
 
@@ -66,14 +66,14 @@ func next_scene():
 	TA.hold_end()
 	SceneHelper.fade_to_black(1.8, .5)
 	AuH.vol_tween(AuH.BG, -20.0, 1.8)
-	yield(get_tree().create_timer(1.8), "timeout")
+	await get_tree().create_timer(1.8).timeout
 	
 	if SceneHelper.isSpaces:
-		get_tree().change_scene("res://Spaces.tscn")
+		get_tree().change_scene_to_file("res://Spaces.tscn")
 	else:
-		get_tree().change_scene("res://Scenes/Forest_1.tscn")
+		get_tree().change_scene_to_file("res://Scenes/Forest_1.tscn")
 
 
 func _on_exit_pressed():
-	AuH.rand_note(rand_range(-20, 0), .0, "Reverb")
+	AuH.rand_note(randf_range(-20, 0), .0, "Reverb")
 	next_scene()

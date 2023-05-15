@@ -1,10 +1,10 @@
-extends Spatial
+extends Node3D
 
 func _ready():
 	update_pic(randi()%11)
 
 func _process(_delta):
-	if global_translation.length_squared() > 6400:
+	if global_position.length_squared() > 6400:
 		queue_free()
 
 func update_pic(num):

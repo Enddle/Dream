@@ -1,4 +1,4 @@
-extends Spatial
+extends Node3D
 
 
 const tres = .8
@@ -23,7 +23,7 @@ func _ready():
 
 
 func _process(_delta):
-	if global_translation.length_squared() > 64:
+	if global_position.length_squared() > 64:
 		if tween: tween.kill()
 		queue_free()
 
@@ -32,15 +32,15 @@ func move_along(axis):
 	if !move_allowed: 
 		return
 	
-	var tr = global_translation
+	var tr = global_position
 	if tr.x > tres || tr.x < -tres || tr.y > tres || tr.y < -tres:
 		return
 	
 	var dir = Vector3(axis.y, axis.x, .0)
 	if tween: tween.kill()
 	tween = create_tween()
-	var dur = rand_range(.5, .8)
-	tween.tween_property(self, "global_translation", dir*(randf()+1.0), dur).as_relative()
+	var dur = randf_range(.5, .8)
+	tween.tween_property(self, "global_position", dir*(randf()+1.0), dur).as_relative()
 	tween.parallel().tween_property($Label3D, "modulate", gray, dur)
 	
 	tween.tween_property($Label3D, "modulate", black, dur)
@@ -53,14 +53,14 @@ func fly_out(f):
 	move_allowed = false
 	
 	if tween: tween.kill()
-	var dur = rand_range(.5, .8)
-	var dir = -translation * f
+	var dur = randf_range(.5, .8)
+	var dir = -position * f
 	dir.z = 0
 	tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
-	tween.tween_property(self, "translation", dir, dur).as_relative()
+	tween.tween_property(self, "position", dir, dur).as_relative()
 	tween.parallel().tween_property($Label3D, "modulate", black, dur)
 	
-	tween.tween_callback(self,"allow_move")
+	tween.tween_callback(Callable(self, "allow_move"))
 
 func language_prep():
 	match SceneHelper.lang_curr:

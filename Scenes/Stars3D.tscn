@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scenes/Stars3D.gd" type="Script" id=1]
-[ext_resource path="res://src/fonts/hint_font.tres" type="DynamicFont" id=2]
-[ext_resource path="res://src/dot.png" type="Texture" id=3]
+[ext_resource path="res://src/fonts/hint_font.tres" type="FontFile" id=2]
+[ext_resource path="res://src/dot.png" type="Texture2D" id=3]
 
 [sub_resource type="Environment" id=1]
 glow_enabled = true
@@ -29,31 +29,31 @@ script = ExtResource( 1 )
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 1 )
 
-[node name="Camera" type="Camera" parent="."]
+[node name="Camera3D" type="Camera3D" parent="."]
 fov = 100.0
 
-[node name="Spatial" type="Spatial" parent="Camera"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8 )
+[node name="Node3D" type="Node3D" parent="Camera3D"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8 )
 
-[node name="Pointer" type="MeshInstance" parent="Camera/Spatial"]
+[node name="Pointer" type="MeshInstance3D" parent="Camera3D/Node3D"]
 mesh = SubResource( 4 )
 skeleton = NodePath("../..")
 
-[node name="OmniLight" type="OmniLight" parent="Camera/Spatial/Pointer"]
+[node name="OmniLight3D" type="OmniLight3D" parent="Camera3D/Node3D/Pointer"]
 light_indirect_energy = 0.0
 light_specular = 2.0
 light_bake_mode = 0
 omni_range = 1.0
 omni_attenuation = 4.92458
 
-[node name="World" type="Spatial" parent="."]
+[node name="World" type="Node3D" parent="."]
 
-[node name="sky" type="MeshInstance" parent="World"]
+[node name="sky" type="MeshInstance3D" parent="World"]
 mesh = SubResource( 2 )
 skeleton = NodePath("../../WorldEnvironment")
 
-[node name="skylight" type="OmniLight" parent="World/sky"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 8, 0 )
+[node name="skylight" type="OmniLight3D" parent="World/sky"]
+transform = Transform3D( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 8, 0 )
 visible = false
 light_energy = 0.02
 light_indirect_energy = 0.0
@@ -62,12 +62,12 @@ light_bake_mode = 0
 omni_range = 16.0
 omni_attenuation = 2.2974
 
-[node name="floor" type="MeshInstance" parent="World"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -7, 0 )
+[node name="floor" type="MeshInstance3D" parent="World"]
+transform = Transform3D( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -7, 0 )
 mesh = SubResource( 3 )
 
-[node name="floorlight" type="OmniLight" parent="World/floor"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 2 )
+[node name="floorlight" type="OmniLight3D" parent="World/floor"]
+transform = Transform3D( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 2 )
 light_energy = 0.2
 light_indirect_energy = 0.0
 light_specular = 0.0
@@ -75,12 +75,12 @@ light_bake_mode = 0
 omni_range = 6.0
 omni_attenuation = 3.24901
 
-[node name="Stars" type="Spatial" parent="World"]
+[node name="Stars" type="Node3D" parent="World"]
 
 [node name="Label" type="Label" parent="."]
-margin_right = 40.0
-margin_bottom = 14.0
-custom_fonts/font = ExtResource( 2 )
+offset_right = 40.0
+offset_bottom = 14.0
+theme_override_fonts/font = ExtResource( 2 )
 
 [node name="add_star_timer" type="Timer" parent="."]
 wait_time = 0.2
@@ -91,15 +91,15 @@ visible = false
 modulate = Color( 1, 1, 1, 0.196078 )
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -1122.0
-margin_top = 50.0
-margin_right = 1902.0
-margin_bottom = 3056.0
-rect_scale = Vector2( 0.03, 0.03 )
-rect_pivot_offset = Vector2( 1012, 0 )
+offset_left = -1122.0
+offset_top = 50.0
+offset_right = 1902.0
+offset_bottom = 3056.0
+scale = Vector2( 0.03, 0.03 )
+pivot_offset = Vector2( 1012, 0 )
 icon = ExtResource( 3 )
 flat = true
-icon_align = 1
+icon_alignment = 1
 
 [connection signal="timeout" from="add_star_timer" to="." method="_on_add_star_timeout"]
 [connection signal="pressed" from="exit" to="." method="_on_exit_pressed"]

@@ -77,7 +77,7 @@ var timestart
 var rounds
 var delay_n = 0
 
-onready var text_con = $World/Texts
+@onready var text_con = $World/Texts
 
 
 func _ready():
@@ -94,7 +94,7 @@ func _ready():
 	indicator_show = true
 	
 	randomize()
-	timestart = OS.get_ticks_msec() / 1000
+	timestart = Time.get_ticks_msec() / 1000
 	DynamicColor.start_seq(0)
 	
 	rounds = SceneHelper.rounds
@@ -104,7 +104,7 @@ func _ready():
 		Connect.sendudp("4")
 		Connect.sendextra("1")
 		AuH._FX(AuH.ALARM_FX)
-		yield(get_tree().create_timer(2), "timeout")
+		await get_tree().create_timer(2).timeout
 		AuH._BG(AuH.TEXT_BG, .0, .5)
 	else:
 		Connect.sendudp("8")
@@ -115,7 +115,7 @@ var sec = 0
 
 func _process(delta):
 	
-	var time = OS.get_ticks_msec() / 1000
+	var time = Time.get_ticks_msec() / 1000
 	
 	if rounds == 0:
 		if time - timestart > round0_outtime:
@@ -135,7 +135,7 @@ func _process(delta):
 			DynamicColor.start_seq(1)
 			TA.hold_end()
 			
-			yield(get_tree().create_timer(round1_delay), "timeout")
+			await get_tree().create_timer(round1_delay).timeout
 			
 			Connect.sendudp("-2")
 			
@@ -152,7 +152,7 @@ func process_text(n):
 	var cc = 0
 	
 	if (n == 1):
-		yield(get_tree().create_timer(2), "timeout")
+		await get_tree().create_timer(2).timeout
 	
 	var line_height = lines.size() * (text_size + extra_height)
 	for r in lines.size():
@@ -163,7 +163,7 @@ func process_text(n):
 			
 			var chara = lines[r][c]
 			if chara == " ":
-				yield(get_tree().create_timer(delay_def), "timeout")
+				await get_tree().create_timer(delay_def).timeout
 				continue
 			
 			var x = -line_width / 2 + c * text_size
@@ -172,10 +172,10 @@ func process_text(n):
 #			print(chara + " -at position: " + String(pos))
 			
 			# delay
-			yield(get_tree().create_timer(get_delay(n, cc) + delay_def), "timeout")
+			await get_tree().create_timer(get_delay(n, cc) + delay_def).timeout
 			cc += 1
 			
-			var t = textnode.instance()
+			var t = textnode.instantiate()
 			t.init(chara, pos)
 			text_con.add_child(t)
 
@@ -213,19 +213,19 @@ func next_scene():
 	
 	Connect.sendextra("0")
 	
-	yield(get_tree().create_timer(12.0), "timeout")
+	await get_tree().create_timer(12.0).timeout
 	SceneHelper.fade_to_black(1.0, 0.05)
-	yield(get_tree().create_timer(1.0), "timeout")
-	get_tree().change_scene("res://Scenes/TextOut.tscn")
+	await get_tree().create_timer(1.0).timeout
+	get_tree().change_scene_to_file("res://Scenes/TextOut.tscn")
 
 func end_scenes():
-	get_tree().change_scene("res://EndCredits.tscn")
+	get_tree().change_scene_to_file("res://EndCredits.tscn")
 	pass
 
 
 func _on_exit_pressed():
-	AuH.rand_note(rand_range(-20, 0), .0, "Reverb")
-	get_tree().change_scene("res://Spaces.tscn")
+	AuH.rand_note(randf_range(-20, 0), .0, "Reverb")
+	get_tree().change_scene_to_file("res://Spaces.tscn")
 <<<<<<< Updated upstream
 =======
 

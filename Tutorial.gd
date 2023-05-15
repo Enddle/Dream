@@ -20,8 +20,8 @@ var touching_time = 3.0
 var wait_time = 10.0
 var scene_out = false
 
-onready var Anim = $Anim
-onready var ipad = $TextureRect
+@onready var Anim = $Anim
+@onready var ipad = $TextureRect
 
 
 func _ready():
@@ -35,10 +35,10 @@ func _process(delta):
 			Anim.play("charging_unplug_loop")
 			show_hint(hints[0])
 			
-			yield(get_tree().create_timer(8), "timeout")
+			await get_tree().create_timer(8).timeout
 			Anim.play("charging_unplug")
 			
-			yield(get_tree().create_timer(3), "timeout")
+			await get_tree().create_timer(3).timeout
 			current_step = 1
 			anim_playing = false
 			
@@ -47,34 +47,34 @@ func _process(delta):
 	elif current_step == 1:
 		if !anim_playing:
 			var g = Input.get_gyroscope() * delta
-			ipad.rect_rotation += g.z * 180
-			ipad.rect_scale.x += stepify(g.y, 0.01) * 2
-			ipad.rect_scale.y += stepify(g.x, 0.01) * 2
+			ipad.rotation += g.z * 180
+			ipad.scale.x += snapped(g.y, 0.01) * 2
+			ipad.scale.y += snapped(g.x, 0.01) * 2
 			
-			if ipad.rect_scale.x > 1:
-				ipad.rect_scale.x = 1
-			elif ipad.rect_scale.x < -1:
-				ipad.rect_scale.x = -1
+			if ipad.scale.x > 1:
+				ipad.scale.x = 1
+			elif ipad.scale.x < -1:
+				ipad.scale.x = -1
 			
-			if ipad.rect_scale.y > 1:
-				ipad.rect_scale.y = 1
-			elif ipad.rect_scale.y < -1:
-				ipad.rect_scale.y = -1
+			if ipad.scale.y > 1:
+				ipad.scale.y = 1
+			elif ipad.scale.y < -1:
+				ipad.scale.y = -1
 			
 			total_movement += g.length_squared()
-			$progress.rect_scale.x = total_movement / .6
+			$progress.scale.x = total_movement / .6
 			if total_movement >= .6:
 				anim_playing = true
 				tween = create_tween()
-				tween.tween_property(ipad, "rect_scale", Vector2(1, 1), 0.8)
-				tween.parallel().tween_property(ipad, "rect_rotation", 0.0, 0.8)
+				tween.tween_property(ipad, "scale", Vector2(1, 1), 0.8)
+				tween.parallel().tween_property(ipad, "rotation", 0.0, 0.8)
 				tween.parallel().tween_property($progress, "color:a", 0.0, 0.8)
 				
 				tween.tween_property($touch/a, "modulate:a", 1.0, 0.5)
 				tween.parallel().tween_property($touch/b, "modulate:a", 1.0, 0.5)
 				tween.parallel().tween_property($touch/c, "modulate:a", 1.0, 0.5)
 				
-				yield(get_tree().create_timer(1.0), "timeout")
+				await get_tree().create_timer(1.0).timeout
 				current_step = 2
 				anim_playing = false
 				
@@ -92,8 +92,8 @@ func _process(delta):
 			
 			tween.tween_property($progress, "color:a", 1.0, 0.8).set_delay(1.0)
 			
-			yield(get_tree().create_timer(1.0), "timeout")
-			$progress.rect_scale.x = 1
+			await get_tree().create_timer(1.0).timeout
+			$progress.scale.x = 1
 			current_step = 3
 			anim_playing = false
 			
@@ -104,29 +104,29 @@ func _process(delta):
 			touching_time += -delta if touching else delta / 2
 			touching_time = min(touching_time, 3.0)
 			
-			$progress.rect_scale.x = touching_time / 3.0
+			$progress.scale.x = touching_time / 3.0
 			
-			AuH._vol(AuH.BG, 6 - $progress.rect_scale.x * 12)
+			AuH._vol(AuH.BG, 6 - $progress.scale.x * 12)
 			
 			if touching_time <= 0:
-				$progress.rect_scale.x = 0
+				$progress.scale.x = 0
 				
 				anim_playing = true
 				
 				tween = create_tween()
-				tween.set_ease(Tween.EASE_OUT).tween_property($progress, "rect_scale:x", 1.0, 1.0).set_delay(.5)
-				tween.tween_property($progress, "rect_scale:x", .0, wait_time).set_delay(.5)
+				tween.set_ease(Tween.EASE_OUT).tween_property($progress, "scale:x", 1.0, 1.0).set_delay(.5)
+				tween.tween_property($progress, "scale:x", .0, wait_time).set_delay(.5)
 				
 				AuH.vol_tween(AuH.BG, -6.0, wait_time + 0.5)
 				TA.hold_end()
 				
-				yield(get_tree().create_timer(1.0), "timeout")
+				await get_tree().create_timer(1.0).timeout
 				
 				AuH._FX(AuH.TENSEC_FX, .0, .0)
-				$progress.rect_scale.x = 1
+				$progress.scale.x = 1
 				current_step = 4
 				show_hint(hints[4])
-				yield(get_tree().create_timer(wait_time), "timeout")
+				await get_tree().create_timer(wait_time).timeout
 				start_scene()
 
 
@@ -147,8 +147,8 @@ func _input(event):
 		show_hint(hints[current_step])
 		
 		if current_step == 2:
-			if OS.get_ticks_msec() - presstime > 500:
-				presstime = OS.get_ticks_msec()
+			if Time.get_ticks_msec() - presstime > 500:
+				presstime = Time.get_ticks_msec()
 		
 		elif current_step == 3:
 			touching = true
@@ -161,14 +161,14 @@ func _input(event):
 		if current_step == 2:
 			if touch_count >= 3:
 				pass
-			elif OS.get_ticks_msec() - presstime < 300:
+			elif Time.get_ticks_msec() - presstime < 300:
 				var t = $touch.get_child(touch_count)
 				
-				AuH.rand_note(rand_range(-20, 0), .0, "Reverb")
+				AuH.rand_note(randf_range(-20, 0), .0, "Reverb")
 				TA.touch(touch_pos)
 				
 				tween = create_tween().set_trans(Tween.TRANS_BACK)
-				tween.tween_property(t, "rect_scale", Vector2(.05, .05), .5)
+				tween.tween_property(t, "scale", Vector2(.05, .05), .5)
 				touch_count += 1
 		
 		elif current_step == 3:
@@ -179,9 +179,9 @@ func _input(event):
 
 func start_scene():
 	SceneHelper.fade_to_black(1.0, 1.0)
-	yield(get_tree().create_timer(1.0), "timeout")
+	await get_tree().create_timer(1.0).timeout
 	SceneHelper.isTutorial = false
-	get_tree().change_scene("res://Scenes/Room.tscn")
+	get_tree().change_scene_to_file("res://Scenes/Room.tscn")
 
 
 func _on_Button_pressed():

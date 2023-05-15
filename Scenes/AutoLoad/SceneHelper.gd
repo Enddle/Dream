@@ -16,9 +16,9 @@ var isCredit = false
 var isSpaces = false
 
 var scene_out = false
-var timetick = OS.get_ticks_msec()
+var timetick = Time.get_ticks_msec()
 
-onready var crect = $ColorRect
+@onready var crect = $ColorRect
 
 
 enum {LANG_JP, LANG_EN, LANG_ZH}
@@ -47,10 +47,10 @@ func _process(delta):
 		ptime = pausetime_t
 	
 	var g = Input.get_gyroscope() * delta
-	if stepify(g.length(), 0.001) != 0:
-		timetick = OS.get_ticks_msec()
+	if snapped(g.length(), 0.001) != 0:
+		timetick = Time.get_ticks_msec()
 	
-	if timetick + ptime - OS.get_ticks_msec() < 0:
+	if timetick + ptime - Time.get_ticks_msec() < 0:
 		scene_out = true
 		if isTutorial:
 			restart_end()
@@ -61,7 +61,7 @@ func _process(delta):
 
 
 func fade_to_black(dura_in, dura_out):
-	fade_to(Color.black, dura_in, dura_out)
+	fade_to(Color.BLACK, dura_in, dura_out)
 
 
 func fade_to(c, dura_in, dura_out):
@@ -71,7 +71,7 @@ func fade_to(c, dura_in, dura_out):
 	if tween: tween.kill()
 	tween = create_tween()
 	tween.tween_property(crect, "modulate:a", 1.0, dura_in)
-	tween.tween_callback(self, "hide_restart", [false])
+	tween.tween_callback(Callable(self, "hide_restart").bind(false))
 	tween.tween_property(crect, "modulate:a", 0.0, dura_out)
 
 
@@ -81,11 +81,11 @@ func show_restart():
 	
 	if tween: tween.kill()
 	tween = create_tween()
-	tween.tween_callback(self, "restart_visible", [true])
+	tween.tween_callback(Callable(self, "restart_visible").bind(true))
 	tween.tween_property($return_screen, "modulate:a", 1.0, 1.0)
 	tween.tween_property($return_screen/back/countdown, "modulate:a", 1.0, 1.0).set_delay(1.0)
 	tween.tween_property($return_screen/back/countdown, "value", 0.0, countdown)
-	tween.tween_callback(self, "restart_end")
+	tween.tween_callback(Callable(self, "restart_end"))
 	
 
 
@@ -94,7 +94,7 @@ func hide_restart(anim = true):
 		if tween: tween.kill()
 		tween = create_tween()
 		tween.tween_property($return_screen, "modulate:a", .0, 1.0)
-		tween.tween_callback(self, "restart_visible", [false])
+		tween.tween_callback(Callable(self, "restart_visible").bind(false))
 	else:
 		$return_screen.modulate.a = 0
 		restart_visible(false)
@@ -102,7 +102,7 @@ func hide_restart(anim = true):
 
 func restart_visible(v):
 	$return_screen.visible = v
-	timetick = OS.get_ticks_msec()
+	timetick = Time.get_ticks_msec()
 	scene_out = false
 
 
@@ -110,15 +110,15 @@ func restart_end():
 	fade_to_black(1.0, 1.0)
 	AuH.vol_tween(AuH.BG, -50.0, 1.0)
 	
-	AuH.rand_note(rand_range(-20, 0), .0, "Reverb")
+	AuH.rand_note(randf_range(-20, 0), .0, "Reverb")
 	
-	yield(get_tree().create_timer(1.0), "timeout")
-	get_tree().change_scene("res://StartingScreen.tscn")
+	await get_tree().create_timer(1.0).timeout
+	get_tree().change_scene_to_file("res://StartingScreen.tscn")
 
 
 func _on_return_back_down():
 	$return_screen/back.modulate.a = .4
-	AuH.rand_note(rand_range(-20, 0), .0, "Reverb")
+	AuH.rand_note(randf_range(-20, 0), .0, "Reverb")
 
 
 func _on_return_back_up():
@@ -128,7 +128,7 @@ func _on_return_back_up():
 
 func _on_return_cancel_down():
 	$return_screen/cancel.modulate.a = .4
-	AuH.rand_note(rand_range(-20, 0), .0, "Reverb")
+	AuH.rand_note(randf_range(-20, 0), .0, "Reverb")
 
 
 func _on_return_cancel_up():

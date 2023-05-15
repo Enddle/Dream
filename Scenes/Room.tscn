@@ -2,8 +2,8 @@
 
 [ext_resource path="res://src/room.obj" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Room.gd" type="Script" id=2]
-[ext_resource path="res://Scenes/Room.lmbake" type="BakedLightmapData" id=3]
-[ext_resource path="res://src/dot.png" type="Texture" id=4]
+[ext_resource path="res://Scenes/Room.lmbake" type="LightmapGIData" id=3]
+[ext_resource path="res://src/dot.png" type="Texture2D" id=4]
 
 [sub_resource type="Environment" id=2]
 background_mode = 1
@@ -13,19 +13,19 @@ ambient_light_energy = 0.1
 [node name="Node" type="Node"]
 script = ExtResource( 2 )
 
-[node name="BakedLightmap" type="BakedLightmap" parent="."]
+[node name="LightmapGI" type="LightmapGI" parent="."]
 visible = false
-extents = Vector3( 20, 20, 20 )
+size = Vector3( 20, 20, 20 )
 quality = 3
 light_data = ExtResource( 3 )
 
-[node name="World" type="Spatial" parent="."]
+[node name="World" type="Node3D" parent="."]
 
 [node name="room" parent="World" instance=ExtResource( 1 )]
-transform = Transform( 10, 0, 0, 0, 10, 0, 0, 0, 10, -13, -13, -13 )
+transform = Transform3D( 10, 0, 0, 0, 10, 0, 0, 0, 10, -13, -13, -13 )
 
-[node name="sun_through_window" type="DirectionalLight" parent="World"]
-transform = Transform( 0.989164, -0.0632122, -0.132508, 0.0216048, -0.830061, 0.557254, -0.145215, -0.554079, -0.819701, -1.04681, 11.0142, -25.5344 )
+[node name="sun_through_window" type="DirectionalLight3D" parent="World"]
+transform = Transform3D( 0.989164, -0.0632122, -0.132508, 0.0216048, -0.830061, 0.557254, -0.145215, -0.554079, -0.819701, -1.04681, 11.0142, -25.5344 )
 light_color = Color( 0.976471, 0.494118, 0.282353, 1 )
 light_energy = 1.5
 light_indirect_energy = 4.0
@@ -36,8 +36,8 @@ shadow_enabled = true
 directional_shadow_blend_splits = true
 directional_shadow_max_distance = 300.0
 
-[node name="room_light" type="SpotLight" parent="World"]
-transform = Transform( 0.939693, 8.6451e-10, 0.34202, -0.336724, 0.175298, 0.925142, -0.0599554, -0.984515, 0.164726, 15, 13, 13 )
+[node name="room_light" type="SpotLight3D" parent="World"]
+transform = Transform3D( 0.939693, 8.6451e-10, 0.34202, -0.336724, 0.175298, 0.925142, -0.0599554, -0.984515, 0.164726, 15, 13, 13 )
 light_color = Color( 0.364706, 0.686275, 0.945098, 1 )
 light_indirect_energy = 2.0
 light_size = 0.2
@@ -51,11 +51,11 @@ spot_attenuation = 0.287175
 spot_angle = 61.9
 spot_angle_attenuation = 0.217637
 
-[node name="Spatial" type="Spatial" parent="."]
-transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0 )
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0 )
 
-[node name="environment" type="SpotLight" parent="Spatial"]
-transform = Transform( 1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 50, 20 )
+[node name="environment" type="SpotLight3D" parent="Node3D"]
+transform = Transform3D( 1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 50, 20 )
 light_energy = 0.8
 light_indirect_energy = 0.0
 light_bake_mode = 0
@@ -64,8 +64,8 @@ shadow_contact = 2.0
 spot_range = 106.295
 spot_angle = 33.2902
 
-[node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 60 )
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 60 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 2 )
@@ -82,15 +82,15 @@ visible = false
 modulate = Color( 1, 1, 1, 0.196078 )
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -1122.0
-margin_top = 50.0
-margin_right = 1902.0
-margin_bottom = 3056.0
-rect_scale = Vector2( 0.03, 0.03 )
-rect_pivot_offset = Vector2( 1012, 0 )
+offset_left = -1122.0
+offset_top = 50.0
+offset_right = 1902.0
+offset_bottom = 3056.0
+scale = Vector2( 0.03, 0.03 )
+pivot_offset = Vector2( 1012, 0 )
 icon = ExtResource( 4 )
 flat = true
-icon_align = 1
+icon_alignment = 1
 
 [connection signal="timeout" from="touch_hold_timer" to="." method="_on_touch_hold_timeout"]
 [connection signal="pressed" from="exit" to="." method="_on_exit_pressed"]

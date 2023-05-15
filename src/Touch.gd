@@ -7,7 +7,7 @@ const delay = .2
 
 
 func _ready():
-	rect_scale = scale
+	scale = scale
 	
 	$in.modulate = Color(.5, .5, .5, trans)
 	$out.modulate = Color(.5, .5, .5, .0)
@@ -16,7 +16,7 @@ func _ready():
 	tween.tween_property($in, "modulate:a", .0, .2)
 	tween.parallel().tween_property($out, "modulate:a", trans, .2)
 	tween.tween_property($out, "modulate:a", .0, .2)
-	tween.tween_callback(self, "remove")
+	tween.tween_callback(Callable(self, "remove"))
 
 
 func remove():

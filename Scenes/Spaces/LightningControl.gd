@@ -13,8 +13,8 @@ func _input(event):
 		pass
 	if event is InputEventMouseButton and !event.is_pressed():
 #		print("Mouse Unclick at: ", event.position)
-		if OS.get_ticks_msec() > nextThunder:
-			nextThunder = OS.get_ticks_msec() + 500
+		if Time.get_ticks_msec() > nextThunder:
+			nextThunder = Time.get_ticks_msec() + 500
 #			print("Thunder at: ", event.position.x / 2266)
 			
 			TA.touch(event.position)
@@ -26,9 +26,9 @@ func _input(event):
 func _on_exit_pressed():
 	if scene_out: return
 	scene_out = true
-	AuH.rand_note(rand_range(-20, 0), .0, "Reverb")
+	AuH.rand_note(randf_range(-20, 0), .0, "Reverb")
 	
 	SceneHelper.fade_to_black(1, 1)
-	yield(get_tree().create_timer(1), "timeout")
+	await get_tree().create_timer(1).timeout
 	SceneHelper.isStarting = false
-	get_tree().change_scene("res://Spaces.tscn")
+	get_tree().change_scene_to_file("res://Spaces.tscn")

@@ -1,7 +1,7 @@
 extends Node
 
-onready var cam = $Camera
-onready var world = $World
+@onready var cam = $Camera3D
+@onready var world = $World
 
 var isMobile = false
 var isSynced = false
