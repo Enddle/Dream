@@ -18,20 +18,27 @@ func _ready():
 	timetick = OS.get_ticks_msec() / 1000
 	laststar = timetick - 1
 	
-#	SceneHelper.rounds = 1
-#	AuH._BG(AuH.SPACE_2_BG)
+	Connect.resetbang()
 	
-	if SceneHelper.rounds == 0:
+	if SceneHelper.isSpaces:
+		$exit.visible = true
+		Connect.sendudp("3")
+	
+	elif SceneHelper.rounds == 0:
 		AuH._BG(AuH.SPACE_BG)
+		Connect.sendudp("3")
+		
 	elif SceneHelper.rounds == 1:
 		AuH._BG(AuH.SPACE_2_BG)
+		Connect.sendudp("7")
+		Connect.sendextra("0")
 
 
 func _process(delta):
 	if scene_out:
 		return
 	
-	if OS.get_ticks_msec() / 1000 - timetick > 30:
+	if !SceneHelper.isSpaces and OS.get_ticks_msec() / 1000 - timetick > 30:
 		next_scene()
 		scene_out = true
 	
@@ -40,9 +47,6 @@ func _process(delta):
 		accel -= pointer.translation.normalized() * 5
 	speed += .5 * accel * delta
 	pointer.translate(speed * delta * 2)
-	
-#	if (OS.get_ticks_msec() % 2000 <= 20):
-#		add_star()
 
 
 func _input(event):
@@ -67,6 +71,8 @@ func add_star():
 	star_con.add_child(s)
 	s.global_transform = t
 	
+	Connect.sendbang()
+	
 	AuH.rand_note(rand_range(-20, 0), .0, "Reverb")
 
 
@@ -77,6 +83,8 @@ func next_scene():
 		yield(get_tree().create_timer(3), "timeout")
 		yield(get_tree().create_timer(1), "timeout")
 		
+		Connect.sendextra("1")
+		
 		SceneHelper.fade_to(Color.white, 1.0, 3.0)
 		
 		yield(get_tree().create_timer(.75), "timeout")
@@ -84,6 +92,12 @@ func next_scene():
 		AuH._FX(AuH.ZOOM_FX, .0, .0)
 		
 		yield(get_tree().create_timer(.25), "timeout")
+	
+	if SceneHelper.isSpaces:
+		get_tree().change_scene("res://Spaces.tscn")
+	else:
+		get_tree().change_scene("res://Scenes/TextIn.tscn")
 
-	get_tree().change_scene("res://Scenes/TextIn.tscn")
 
+func _on_exit_pressed():
+	next_scene()

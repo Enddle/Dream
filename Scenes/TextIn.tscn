@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scenes/TextIn.gd" type="Script" id=1]
 [ext_resource path="res://src/fonts/hint_font.tres" type="DynamicFont" id=2]
 [ext_resource path="res://src/icons/arrow.png" type="Texture" id=3]
+[ext_resource path="res://src/dot.png" type="Texture" id=4]
 
 [sub_resource type="Environment" id=1]
 background_mode = 1
@@ -82,3 +83,20 @@ margin_bottom = 874.0
 rect_scale = Vector2( 0.6, 0.6 )
 rect_pivot_offset = Vector2( 256, 120 )
 texture = ExtResource( 3 )
+
+[node name="exit" type="Button" parent="."]
+visible = false
+modulate = Color( 0, 0, 0, 0.196078 )
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -1122.0
+margin_top = 50.0
+margin_right = 1902.0
+margin_bottom = 3056.0
+rect_scale = Vector2( 0.03, 0.03 )
+rect_pivot_offset = Vector2( 1012, 0 )
+icon = ExtResource( 4 )
+flat = true
+icon_align = 1
+
+[connection signal="pressed" from="exit" to="." method="_on_exit_pressed"]

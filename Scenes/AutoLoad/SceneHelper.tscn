@@ -11,6 +11,76 @@
 layer = 2
 script = ExtResource( 1 )
 
+[node name="settings_screen" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="ColorRect" type="ColorRect" parent="settings_screen"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -1133.0
+margin_top = -744.0
+margin_right = 1133.0
+margin_bottom = 744.0
+color = Color( 0, 0, 0, 0.666667 )
+
+[node name="Label" type="Label" parent="settings_screen"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -280.0
+margin_top = -475.0
+margin_right = 280.0
+margin_bottom = -419.0
+custom_fonts/font = ExtResource( 2 )
+text = "SETTINGS"
+align = 1
+valign = 1
+
+[node name="ip" type="LineEdit" parent="settings_screen"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -348.0
+margin_top = -357.0
+margin_right = 130.0
+margin_bottom = -273.0
+custom_fonts/font = ExtResource( 2 )
+text = "192.168.0.47"
+caret_blink = true
+caret_blink_speed = 0.5
+
+[node name="port" type="LineEdit" parent="settings_screen"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 139.0
+margin_top = -357.0
+margin_right = 344.0
+margin_bottom = -273.0
+custom_fonts/font = ExtResource( 2 )
+text = "7001"
+caret_blink = true
+caret_blink_speed = 0.5
+
+[node name="save" type="Button" parent="settings_screen"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -165.0
+margin_top = -166.0
+margin_right = 165.0
+margin_bottom = -88.0
+custom_fonts/font = ExtResource( 2 )
+text = "  SAVE & CLOSE  "
+
 [node name="return_screen" type="Control" parent="."]
 visible = false
 anchor_right = 1.0
@@ -120,6 +190,7 @@ margin_right = 40.0
 margin_bottom = 14.0
 custom_fonts/font = ExtResource( 2 )
 
+[connection signal="pressed" from="settings_screen/save" to="." method="_on_settings_save_pressed"]
 [connection signal="button_down" from="return_screen/back" to="." method="_on_return_back_down"]
 [connection signal="button_up" from="return_screen/back" to="." method="_on_return_back_up"]
 [connection signal="button_down" from="return_screen/cancel" to="." method="_on_return_cancel_down"]

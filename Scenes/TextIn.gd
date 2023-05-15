@@ -82,6 +82,9 @@ onready var text_con = $World/Texts
 
 func _ready():
 	
+	if SceneHelper.isSpaces:
+		$exit.visible = true
+	
 	$Anim.play("arrow_indicate")
 	indicator_show = true
 	
@@ -90,13 +93,16 @@ func _ready():
 	DynamicColor.start_seq(0)
 	
 	rounds = SceneHelper.rounds
-#	rounds = 1
 	process_text(rounds)
 	
 	if rounds == 0:
+		Connect.sendudp("4")
+		Connect.sendextra("1")
 		AuH._FX(AuH.ALARM_FX)
 		yield(get_tree().create_timer(2), "timeout")
 		AuH._BG(AuH.TEXT_BG, .0, .5)
+	else:
+		Connect.sendudp("8")
 
 
 var sec = 0
@@ -125,6 +131,9 @@ func _process(delta):
 			TA.hold_end()
 			
 			yield(get_tree().create_timer(round1_delay), "timeout")
+			
+			Connect.sendudp("-2")
+			
 			end_scenes()
 			
 		elif time - timestart > 20 && !triggered:  # text fly out
@@ -197,6 +206,8 @@ func next_scene():
 	DynamicColor.start_seq(3)
 	TA.hold_end()
 	
+	Connect.sendextra("0")
+	
 	yield(get_tree().create_timer(12.0), "timeout")
 	SceneHelper.fade_to_black(1.0, 0.05)
 	yield(get_tree().create_timer(1.0), "timeout")
@@ -205,3 +216,8 @@ func next_scene():
 func end_scenes():
 	get_tree().change_scene("res://EndCredits.tscn")
 	pass
+
+
+func _on_exit_pressed():
+	AuH.rand_note(rand_range(-20, 0), .0, "Reverb")
+	get_tree().change_scene("res://Spaces.tscn")

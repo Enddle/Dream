@@ -18,6 +18,7 @@ config/icon="res://icon.png"
 
 AuH="*res://Scenes/AutoLoad/AudioHelper.tscn"
 DynamicColor="*res://Scenes/AutoLoad/DynamicColor.tscn"
+Connect="*res://Scenes/AutoLoad/Connect.gd"
 SceneHelper="*res://Scenes/AutoLoad/SceneHelper.tscn"
 Hint="*res://Scenes/AutoLoad/Hint.tscn"
 TA="*res://Scenes/AutoLoad/TouchAnimOverlay.tscn"

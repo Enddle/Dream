@@ -15,7 +15,10 @@ func _ready():
 	$Label.text = ""
 	$Label2.modulate.a = 0.0
 	yield(get_tree().create_timer(5), "timeout")
+	
+	Connect.sendudp("-1")
 	AuH._BG(AuH.ENDING_BG, 3.0, .0)
+	
 	yield(get_tree().create_timer(.2), "timeout")
 	$Label.text = credits[0]
 	yield(get_tree().create_timer(4.0), "timeout")
