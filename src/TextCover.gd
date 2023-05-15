@@ -11,10 +11,13 @@ var move_allowed = true
 const random_en = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 const random_jp = "あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわを"
 
-const random_text = random_jp
+var random_text = random_jp
 
 
 func _ready():
+	
+	language_prep()
+	
 	$Label3D.text = random_text[randi()%random_text.length()]
 	rotation.z = randf() * 4
 
@@ -58,3 +61,10 @@ func fly_out(f):
 	tween.parallel().tween_property($Label3D, "modulate", black, dur)
 	
 	tween.tween_callback(self,"allow_move")
+
+func language_prep():
+	match SceneHelper.lang_curr:
+		SceneHelper.LANG_JP:
+			random_text = random_jp
+		SceneHelper.LANG_EN:
+			random_text = random_en

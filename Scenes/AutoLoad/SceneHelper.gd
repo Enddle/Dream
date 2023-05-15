@@ -21,6 +21,11 @@ var timetick = OS.get_ticks_msec()
 onready var crect = $ColorRect
 
 
+enum {LANG_JP, LANG_EN, LANG_ZH}
+
+var lang_curr = LANG_EN
+
+
 func _ready():
 	isMobile = (OS.get_name() == "iOS")
 	hide_restart(false)

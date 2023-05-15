@@ -60,12 +60,12 @@ const text_size_jp = 1.5
 const extra_height_jp = .0
 const delay_def_jp = .15
 
-const texts = texts_jp
-const delays = delays_jp
+var texts = texts_jp
+var delays = delays_jp
 
-const text_size = text_size_jp
-const extra_height = extra_height_jp
-const delay_def = delay_def_jp
+var text_size = text_size_jp
+var extra_height = extra_height_jp
+var delay_def = delay_def_jp
 
 const round0_outtime = 20
 const round1_outtime = 40
@@ -82,6 +82,11 @@ onready var text_con = $World/Texts
 
 func _ready():
 	
+<<<<<<< Updated upstream
+=======
+	language_prep()
+	
+>>>>>>> Stashed changes
 	if SceneHelper.isSpaces:
 		$exit.visible = true
 	
@@ -221,3 +226,22 @@ func end_scenes():
 func _on_exit_pressed():
 	AuH.rand_note(rand_range(-20, 0), .0, "Reverb")
 	get_tree().change_scene("res://Spaces.tscn")
+<<<<<<< Updated upstream
+=======
+
+
+func language_prep():
+	match SceneHelper.lang_curr:
+		SceneHelper.LANG_JP:
+			texts = texts_jp
+			delays = delays_jp
+			text_size = text_size_jp
+			extra_height = extra_height_jp
+			delay_def = delay_def_jp
+		SceneHelper.LANG_EN:
+			texts = texts_en
+			delays = delays_en
+			text_size = text_size_en
+			extra_height = extra_height_en
+			delay_def = delay_def_en
+>>>>>>> Stashed changes

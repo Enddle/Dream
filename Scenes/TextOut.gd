@@ -12,7 +12,8 @@ var touched_hint_delay = 4000
 var timetick
 
 onready var text_con = $World/Texts
-onready var main_text = $World/MainText
+
+var main_text
 
 
 func light_on_anim_ends():
@@ -21,6 +22,12 @@ func light_on_anim_ends():
 
 
 func _ready():
+<<<<<<< Updated upstream
+=======
+	
+	language_prep()
+	
+>>>>>>> Stashed changes
 	Connect.sendudp("5")
 	
 	if SceneHelper.isSpaces:
@@ -113,3 +120,16 @@ func next_scene():
 func _on_exit_pressed():
 	AuH.rand_note(rand_range(-20, 0), .0, "Reverb")
 	next_scene()
+<<<<<<< Updated upstream
+=======
+
+
+func language_prep():
+	match SceneHelper.lang_curr:
+		SceneHelper.LANG_JP:
+			main_text = $World/MainText_jp
+		SceneHelper.LANG_EN:
+			main_text = $World/MainText_en
+	main_text.visible = true
+
+>>>>>>> Stashed changes
